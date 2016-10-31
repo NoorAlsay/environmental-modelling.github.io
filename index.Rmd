@@ -1,0 +1,57 @@
+---
+title: "R Markdown"
+output:
+  html_document:
+    toc_float: false
+    includes:
+      before_body: [include_header.html, include_header_navpage.html]
+---
+
+
+```{js}
+$("#rStudioHeader").removeClass("alwaysShrunk");
+$("#pageContent").removeClass("standardPadding");
+```
+
+
+<!--html_preserve-->
+
+<div id="homeContent">
+  <div class="band full blue first rightText">
+    <div class="bandContent vCenter">
+      <div class="blurb">
+        <div class="tagline">Analyze. Share. Reproduce.</div>
+        <div>Your data tells a story. Tell it with R Markdown. Turn your analyses into high quality documents, reports, presentations and dashboards.</div>
+      </div>
+    </div>
+    <img class="imageOne" src="images/bandOne.png"/>
+  </div>
+
+  <div class="band full gray1 second leftText">
+    <div class="bandContent vCenter">
+      <div class="blurb">
+        <div>R Markdown documents are fully reproducible. Use a productive <a href="r_notebooks.html">notebook interface</a> to weave together narrative text and code to produce elegantly formatted output. Use <a href="authoring_knitr_engines.html">multiple languages</a> including R, Python, and SQL.</div>
+      </div>
+    </div>
+    <img class="imageTwo" src="images/bandTwo2.png"/>
+  </div>
+
+  <div class="band full third rightText">
+    <img class="imageThree" src="images/bandThree2.png"/>
+    <div class="bandContent vCenter">
+      <div class="blurb">
+        <div>
+          R Markdown supports dozens of static and dynamic output formats including
+          <a href="html_document_format.html">HTML</a>, <a href="pdf_document_format.html">PDF</a>, <a href="word_document_format.html">MS Word</a>, <a href="beamer_presentation_format.html">Beamer</a>, <a href="ioslides_presentation_format.html">HTML5 slides</a>, <a href="tufte_handout_format.html">Tufte-style handouts</a>, <a href="https://bookdown.org">books</a>, <a href="flexdashboard/">dashboards</a>,
+          <a href="authoring_shiny.html">shiny applications</a>, <a href="https://github.com/rstudio/rticles">scientific articles</a>, <a href="rmarkdown_websites.html">websites</a>, and more.
+        </div>
+        <div class="actions">
+          <div><a href="lesson-1.html"><button class="bigButton getStarted">Get Started</button></a></div>
+          <div><a href="gallery.html"><button class="bigButton gallery">See Gallery</button></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--/html_preserve-->
