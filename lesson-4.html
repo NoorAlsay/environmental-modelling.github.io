@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Multiple regression modelling</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/textmate.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\envmodel.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">R Markdown</a>
+      <div class="rStudio"><span class="light">from </span> <a href="https://www.rstudio.com/"><div class="logo"></div></a></div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Lessons</a>
+        <a class="menuItem" href="Tests.html">Tests & trainings</a>
+        <a class="menuItem" href="presentations/Introduction_R.html">Presentations</a>
+        <a class="menuItem" href="materials.html">Materials</a>
+        <a class="menuItem gitHub" href="https://github.com/rstudio/rmarkdown"></a>
+        <a class="menuItem gitHubText" href="https://github.com/rstudio/rmarkdown">Source on GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">R Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">Corellation and linear regression</a>
+    <a id="nav-lesson-3" href="lesson-3.html">Basic models in R</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Multiple regression modelling</a>
+    <!--<a id="nav-lesson-5" href="lesson-5.html">Multiple regression modelling</a>
+    
+    <a id="nav-lesson-6" href="lesson-6.html">Parameters</a>
+    <a id="nav-lesson-7" href="lesson-7.html">Tables</a>
+    <a id="nav-lesson-8" href="lesson-8.html">Markdown Basics</a>
+    <a id="nav-lesson-9" href="lesson-9.html">Output Formats</a>
+    <a id="nav-lesson-10" href="lesson-10.html">Notebooks</a>
+    <a id="nav-lesson-11" href="lesson-11.html">Slide Presentations</a>
+    <a id="nav-lesson-12" href="lesson-12.html">Dashboards</a>
+    <a id="nav-lesson-13" href="lesson-13.html">Websites</a>
+    <a id="nav-lesson-14" href="lesson-14.html">Interactive Documents</a>
+    <a id="nav-lesson-15" href="lesson-15.html">Cheatsheets</a>-->
+  </div>
+  <div class="lessonContent">
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Multiple regression modelling</h1>
+
+</div>
+
+
+<pre><code>## # A tibble: 1,379 × 6
+##        earn height    sex     race    ed   age
+##       &lt;dbl&gt;  &lt;dbl&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+## 1  79571.30  73.89   male    white    16    49
+## 2  96396.99  66.23 female    white    16    62
+## 3  48710.67  63.77 female    white    16    33
+## 4  80478.10  63.22 female    other    16    95
+## 5  82089.35  63.08 female    white    17    43
+## 6  15313.35  64.53 female    white    15    30
+## 7  47104.17  61.54 female    white    12    53
+## 8  50960.05  73.29   male    white    17    50
+## 9   3212.65  72.24   male hispanic    15    25
+## 10 42996.64  72.40   male    white    12    30
+## # ... with 1,369 more rows</code></pre>
+<pre><code>## # A tibble: 48 × 5
+##          state  abbr   low murder tc2009
+##          &lt;chr&gt; &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1      Alabama    AL   -27    7.1 4337.5
+## 2       Alaska    AK   -80    3.2 3567.1
+## 3      Arizona    AZ   -40    5.5 3725.2
+## 4     Arkansas    AR   -29    6.3 4415.4
+## 5   California    CA   -45    5.4 3201.6
+## 6     Colorado    CO   -61    3.2 3024.5
+## 7  Connecticut    CT   -32    3.0 2646.3
+## 8     Delaware    DE   -17    4.6 3996.8
+## 9      Florida    FL    -2    5.5 4453.7
+## 10     Georgia    GA   -17    6.0 4180.6
+## # ... with 38 more rows</code></pre>
+<pre><code>## tc2009 ~ low</code></pre>
+<pre><code>## [1] &quot;formula&quot;</code></pre>
+<div id="multiple-comparison" class="section level2">
+<h2>Multiple comparison</h2>
+<p>To this end, we built models using only numerical variables. Let us remember that we have categorical values called R factors, and consider the following example:</p>
+<pre class="r"><code>rmod &lt;- lm(earn ~ race, data = wages)
+coef(rmod)</code></pre>
+<pre><code>##  (Intercept) racehispanic    raceother    racewhite 
+##    28372.094    -2886.791     3905.320     4993.330</code></pre>
+<p>We tried to posterity linear model based on earnings from the race. If we look at the coefficients, the result is quite unexpected. First, it was calculated the coefficients for each level of the factor, and secondly, we are not all the levels like we don’t have a ratio for the level “black”.</p>
+<p>The fact that one of the levels variable is chosen as the base. Each subsequent level gets a room in a gradation and it rasshiryaetsya separate factor that shows how its coefficient differs from the base.</p>
+<p>Because we have not seen the coefficient for the black population, so it is a base, i.e. 28372.09. For Hispanics, the final ratio will be 28372.09 + -2886.79 = 25485.30. And for the white population 28372.09 + 4993.33 = 33365.42</p>
+<p>Because the final figure for Hispanics is the lowest it would be logical to make it a basic level. You can do this by changing the order of levels of factors:</p>
+<pre class="r"><code>wages$race &lt;- factor(wages$race, 
+levels = c(&quot;hispanic&quot;, &quot;white&quot;, &quot;black&quot;, &quot;other&quot;))
+rmod2 &lt;- lm(earn ~ race, data = wages)
+coef(rmod2)</code></pre>
+<pre><code>## (Intercept)   racewhite   raceblack   raceother 
+##   25485.303    7880.121    2886.791    6792.111</code></pre>
+<p>It is easy to notice that despite the fact that the values of the coefficients have changed, their resulting values remained the same.</p>
+<div id="anova" class="section level4">
+<h4>ANOVA</h4>
+<p>Let’s again refer to your knowledge on statistics and sadomania, but what regressionis similar analysis for categorical variables? In fact it is we are trying to compare the differences between a great unifying force and its individual subgroups, which is very similar to analysis of variance (ANOVA - Analysis of Variance). It really is so we can use the data dispersionnogo analysis, using the command anova() on our model.</p>
+<pre class="r"><code>anova(rmod2)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: earn
+##             Df     Sum Sq    Mean Sq F value  Pr(&gt;F)  
+## race         3 6.7924e+09 2264121503  2.3241 0.07328 .
+## Residuals 1375 1.3395e+12  974196170                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>In addition to the ANOVA, there are many similar tests you can use, too:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Test</th>
+<th>Statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>lm</td>
+<td>ANOVA</td>
+<td>mean</td>
+</tr>
+<tr class="even">
+<td>aov</td>
+<td>ANOVA</td>
+<td>mean</td>
+</tr>
+<tr class="odd">
+<td>anova</td>
+<td>ANOVA</td>
+<td>mean</td>
+</tr>
+<tr class="even">
+<td>oneway.test</td>
+<td>ANOVA for different dispersion</td>
+<td>average</td>
+</tr>
+<tr class="odd">
+<td>pairwise.t.test</td>
+<td>t-test mnojestva groups</td>
+<td>average</td>
+</tr>
+<tr class="even">
+<td>kruskal.test</td>
+<td>Kruskal Wallis Rank Sum</td>
+<td>amount</td>
+</tr>
+<tr class="odd">
+<td>friedman.test</td>
+<td>Friedman Rank Sum</td>
+<td>amount</td>
+</tr>
+<tr class="even">
+<td>fligner.test</td>
+<td>Fligner-Killeen</td>
+<td>dispersion</td>
+</tr>
+<tr class="odd">
+<td>bartlett.test</td>
+<td>test Bartlett</td>
+<td>dispersion</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s look at the dependence of the earnings from the floor. And whether there is a statistically significant difference between the salaries of men and women</p>
+<pre class="r"><code>smod &lt;- lm(earn ~ sex, data = wages)
+coef(smod)</code></pre>
+<pre><code>## (Intercept)     sexmale 
+##    24245.65    21747.48</code></pre>
+<pre class="r"><code>wages$sex &lt;- factor(wages$sex, 
+levels = c(&quot;male&quot;, &quot;female&quot;))
+smod &lt;- lm(earn ~ sex, data = wages)
+coef(smod)</code></pre>
+<pre><code>## (Intercept)   sexfemale 
+##    45993.13   -21747.48</code></pre>
+<p>So, if we take male wages as the base, it will be 45993, and the female will be less on her 21747. The difference was enormous, so let’s check how these data statisticheski reliable:</p>
+<pre class="r"><code>anova(smod)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: earn
+##             Df     Sum Sq    Mean Sq F value    Pr(&gt;F)    
+## sex          1 1.5320e+11 1.5320e+11  176.81 &lt; 2.2e-16 ***
+## Residuals 1377 1.1931e+12 8.6646e+08                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Pr(&gt;F) &lt; 2.2 e-16 *** tells us that the probability of the null hypothesis equal to zero, and thus designed our model a huge difference is statistically significant. Histogram of salaries reassures us that:</p>
+<pre class="r"><code>qplot(earn, data = wages, geom = &quot;density&quot;, color = sex) + theme_bw()</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Having constructed a similar chart for the various races we can notice that the difference between races are not so fundamental:</p>
+<pre class="r"><code>qplot(earn, data = wages, geom = &quot;density&quot;, color = race) + theme_bw()</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+</div>
+<div id="estimation-of-functions-of-several-variables" class="section level2">
+<h2>Estimation of functions of several variables</h2>
+<p>To this end, we examined the dependence of one variable from only one another. Yet, R allows to find the dependence on an unlimited number of variables. For example build a model based on earnings growth</p>
+<pre class="r"><code>m1 &lt;- lm(earn ~ height, data = wages)
+coef(m1)</code></pre>
+<pre><code>## (Intercept)      height 
+## -126523.359    2387.196</code></pre>
+<p>And here is the following code allows us to describe the dependence of earnings on age and gender.</p>
+<pre class="r"><code>m2 &lt;- lm(earn ~ height + sex, data = wages)
+coef(m2)</code></pre>
+<pre><code>## (Intercept)      height   sexfemale 
+##  -15605.703     879.424  -16874.158</code></pre>
+<p>The second factor can be interpreted as the effect of the presence of female …when growth is considered unchanged. The first factor can be interpreted as changes in earnings depending on the growth …provided that the floor unchanged.</p>
+<p>The following chart shows two models - based on earnings growth for men and women</p>
+<pre class="r"><code>qplot(height, earn, data = wages, alpha = I(1/10), color = sex) + theme_bw() + geom_line(aes(y = predict(m2)))</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Thus adding additional peremennye essentially caused the ruin of our model.</p>
+<p>Refer to the set of the diamond and look at the influence of type of cutting (cut) and the number of carats in a diamond on its value:</p>
+<pre class="r"><code>qplot(price, data = diamonds, color = cut, geom = &quot;density&quot;)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Lets construct two models, with and without consideration of the weight of diamond in carats:</p>
+<pre class="r"><code>diamonds$cut &lt;- as.character(diamonds$cut)
+
+d1 &lt;- lm(price ~ cut, data = diamonds)
+coef(d1)</code></pre>
+<pre><code>##  (Intercept)      cutGood     cutIdeal   cutPremium cutVery Good 
+##    4358.7578    -429.8933    -901.2158     225.4999    -376.9979</code></pre>
+<pre class="r"><code>d2 &lt;- lm(price ~ cut + carat, data = diamonds)
+coef(d2)</code></pre>
+<pre><code>##  (Intercept)      cutGood     cutIdeal   cutPremium cutVery Good 
+##    -3875.470     1120.332     1800.924     1439.077     1510.135 
+##        carat 
+##     7871.082</code></pre>
+<p>If we look at the data model does not account for the weight of a diamond, we will see a strange picture, when the value of a diamond with the perfect agranco much less than that of a diamond with good and very good cut. But if you consider the weight (and therefore size) of the diamond, then everything falls into place. Diamonds with ideal avrankou in this model are more expensive, but given their “carat”.</p>
+<p>Described above is perfectly visible in the following graph:</p>
+<pre class="r"><code>qplot(carat, predict(d2), data = diamonds, color = cut, geom = &quot;line&quot;)</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div id="a-similar-effect-of-the-introduction-of-the-additional-variable-is-widely-known-and-even-has-its-own-name---the-paradox-simpson" class="section level4">
+<h4>A similar effect of the introduction of the additional variable is widely known and even has its own name - the paradox Simpson</h4>
+<p>Its essence lies in the fact that the relationship between two variables can change if to consider a third, related variable.</p>
+</div>
+<div id="since-this-problem-is-well-known-there-is-a-standard-solution" class="section level4">
+<h4>Since this problem is well known, there is a standard solution:</h4>
+<p>Model each source of variation in the system at the same time</p>
+<p>Create a new model that predicts earnings depending on the growth, sex, race, education and age.And try to answer the question is there a relationship between height and income? And between the floor and the earnings?</p>
+<pre class="r"><code>m3 &lt;- lm(earn ~ height + sex + race + ed + age, data = wages)
+coef(m3)</code></pre>
+<pre><code>## (Intercept)      height   sexfemale   racewhite   raceblack   raceother 
+## -74354.1693    632.7391 -17552.5441   4592.7865   2086.0663   1708.3196 
+##          ed         age 
+##   4382.0853    287.4744</code></pre>
+<p>Symbol . is used in the formula, as a symbol of all the other variables. I.e. we can describe the same model using the code:</p>
+<pre class="r"><code>lm(earn ~ height + sex + race + ed + age, data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height + sex + race + ed + age, data = wages)
+## 
+## Coefficients:
+## (Intercept)       height    sexfemale    racewhite    raceblack  
+##    -74354.2        632.7     -17552.5       4592.8       2086.1  
+##   raceother           ed          age  
+##      1708.3       4382.1        287.5</code></pre>
+<pre class="r"><code>lm(earn ~ ., data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ ., data = wages)
+## 
+## Coefficients:
+## (Intercept)       height    sexfemale    racewhite    raceblack  
+##    -74354.2        632.7     -17552.5       4592.8       2086.1  
+##   raceother           ed          age  
+##      1708.3       4382.1        287.5</code></pre>
+<p>Such a recording, with the use of the mark . you can modify it taking away from the individual variables:</p>
+<pre class="r"><code>lm(earn ~ height + sex + race + ed, data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height + sex + race + ed, data = wages)
+## 
+## Coefficients:
+## (Intercept)       height    sexfemale    racewhite    raceblack  
+##    -46648.9        440.6     -18036.5       6128.5       2915.6  
+##   raceother           ed  
+##      3379.3       4159.8</code></pre>
+<pre class="r"><code>lm(earn ~ . - age, data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ . - age, data = wages)
+## 
+## Coefficients:
+## (Intercept)       height    sexfemale    racewhite    raceblack  
+##    -46648.9        440.6     -18036.5       6128.5       2915.6  
+##   raceother           ed  
+##      3379.3       4159.8</code></pre>
+</div>
+</div>
+<div id="interaction-terms-between-variables" class="section level1">
+<h1>Interaction terms between variables</h1>
+<p>We proceeded from the fact that each of the independent variables does not affect the other. What, for example is obviously not true for gender and height because the average height of women is less. In order for R to take into account when modeling the interaction of the independent variables, we will have to add to the formula another variable, which describes the interaction of these variables among themselves. So for the above height and gender, the resulting model formula will look like this:</p>
+<pre class="r"><code>m4 &lt;- lm(earn ~ height + sex + height:sex,   data = wages)
+coef(m4)</code></pre>
+<pre><code>##      (Intercept)           height        sexfemale height:sexfemale 
+##      -42677.4003        1265.9167       30510.4336        -701.4065</code></pre>
+<p>What is the meaning of the coefficients? To men height increase of 1 inch will result in increased earnings for 1265.92. For women the increase 1 inch will increase the earnings on 1265.92 + (-701.41) = 564.51.</p>
+<p>If we build two graphs of the predictions of the two models, we can see that the model taking into account the direct semiadalia variables for men and women ceased to be parallel. Which means, cosmelenia in the growth of men and women will lead to different growth of wages.</p>
+<pre class="r"><code>qplot(height, earn, data = wages, alpha = I(1/10), color = sex) + theme_bw() + geom_line(aes(y = predict(lm(earn ~ height + sex,   data = wages))))</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>qplot(height, earn, data = wages, alpha = I(1/10), color = sex) + theme_bw() + geom_line(aes(y = predict(m4)))</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<p>Thus, the function of the form</p>
+<pre class="r"><code>lm(earn ~ height + sex + height:sex, data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height + sex + height:sex, data = wages)
+## 
+## Coefficients:
+##      (Intercept)            height         sexfemale  height:sexfemale  
+##         -42677.4            1265.9           30510.4            -701.4</code></pre>
+<p>will predict the value of earnings value of growth…given the importance of sex …and taking into account the interaction between the variables height and gender</p>
+<div id="important-the-order-of-variables-in-the-formula-is-of-the-utmost-importance-yxz-and-yzx-are-two-different-models" class="section level5">
+<h5>Important: the order of variables in the formula is of the utmost importance y~x+z and y~z+x are two different models</h5>
+<pre class="r"><code>lm(earn ~ height * sex, data = wages)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height * sex, data = wages)
+## 
+## Coefficients:
+##      (Intercept)            height         sexfemale  height:sexfemale  
+##         -42677.4            1265.9           30510.4            -701.4</code></pre>
+<p>The * character is shorthand notation what we want to consider the impact of these two variables on the dependent variable and want to consider their interaction with each other.</p>
+<p>The entry ^2 means that the model needs to take into account all interactions of first order(one-variable - +) and all interactions of second order (interaction of variables with each other - :)</p>
+<pre class="r"><code>lm(earn ~ height + sex + height:sex, data = w1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height + sex + height:sex, data = w1)
+## 
+## Coefficients:
+##    (Intercept)          height         sexmale  height:sexmale  
+##       -31845.8           868.3        139602.2         -1683.4</code></pre>
+<pre class="r"><code>lm(earn ~ height * sex, data = w1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height * sex, data = w1)
+## 
+## Coefficients:
+##    (Intercept)          height         sexmale  height:sexmale  
+##       -31845.8           868.3        139602.2         -1683.4</code></pre>
+<pre class="r"><code>lm(earn ~ (height + sex)^2, data = w1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ (height + sex)^2, data = w1)
+## 
+## Coefficients:
+##    (Intercept)          height         sexmale  height:sexmale  
+##       -31845.8           868.3        139602.2         -1683.4</code></pre>
+<p>If we want to consider a model with three independent variables,let’s add in our model Russ, we have poyavyatsya interactions and the third order - the height:sex:race</p>
+<p>Then we can use the recording ^3, which would indicate that in the model it is necessary to use all interactions of the first, second and third order.</p>
+<pre class="r"><code>lm(earn ~ (height + sex + race)^3,data = w1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ (height + sex + race)^3, data = w1)
+## 
+## Coefficients:
+##                 (Intercept)                       height  
+##                     -166395                         2944  
+##                     sexmale                 racehispanic  
+##                      491439                       183266  
+##                   raceother                    racewhite  
+##                      385211                       128984  
+##              height:sexmale          height:racehispanic  
+##                       -7062                        -2437  
+##            height:raceother             height:racewhite  
+##                       -6064                        -1993  
+##        sexmale:racehispanic            sexmale:raceother  
+##                          NA                           NA  
+##           sexmale:racewhite  height:sexmale:racehispanic  
+##                     -396323                           NA  
+##    height:sexmale:raceother     height:sexmale:racewhite  
+##                          NA                         6052</code></pre>
+<pre class="r"><code>qplot(height, earn, data = w1, alpha = I(1/10), color = sex) + theme_bw() + geom_line(aes(y = predict(lm(earn ~ (height + sex + race)^3,data = w1))))</code></pre>
+<p><img src="lesson-4_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="cheat-sheet-formulas-modeling-in-r" class="section level4">
+<h4>Cheat sheet formulas modeling in R</h4>
+<ul>
+<li>‘~’ Separates dependent variables from independent variables from right to left. For example, the formula of dependence y from x, z, and w would look like y ~ x + z + w.</li>
+<li>‘+’ Separates the independent variables.</li>
+<li>The ‘:’ denotes the interaction between the independent variables. Description y is a value dependent on x, z, and interactions between x and z will look like y ~ x + z + x:z.</li>
+<li>’<em>’ Short account of all possible interactions between variables. The code y ~ x </em> z * w is equivalent to y ~ x + z + w + x:z + x:w + z:w + x:z:w.</li>
+<li>‘^’ Denotes the interaction of a certain level. The code y ~ (x + z + w)^2 is equivalent to y ~ x + z + w + x:z + x:w + z:w.</li>
+<li>‘.’ Brief notation indicating all other variables in the table except for the dependent variable. For example, if the table contains variables x, y, z, and w, then the code y ~ . is equivalent to y ~ x + z + w.</li>
+<li>The ‘-’ sign miinus removes a variable from the formula. For example, y ~ (x + z + w)^2 – x w equivalent to y ~ x + z + w + x:z + z:w.</li>
+<li>‘-1’ Removes the first coefficient, causing the graph of the model function to pass through the origin .</li>
+<li>‘I()’ Elements within the braces are interpreted numerically. For example, y ~ x + (z + w)^2 is equivalent to y ~ x + z + w + z:w. But, the code y ~ x + I((z + w)^2) is equivalent to y ~ x + h, where h is a new variable obtained by squaring the sum of z and w.</li>
+<li>‘function’ is Any mathematical function can be used in the formula. For example, log(y) ~ x + z + w will attempt to describe the dependence of log(y) from x, z, and w.</li>
+</ul>
+</div>
+<div id="analysis-of-multiple-regression-models" class="section level4">
+<h4>Analysis of multiple regression models</h4>
+<p>All of the tasks that stood in front of us to analyze models of linear regressi relevant here. But for models in multiple regression there is another problem - the definition of otdelnoy contribution of each variable in the final model and conclusion about her need to stay in it.</p>
+<p>Another problem, besides the fact that the variables that you added may slightly affect your model, is that if present in the model variables correlate, it can contribute to a strong error in their R-values.</p>
+<p>In order to avoid such a situation known as multicollinearity, you will have to check the values of correlation for all of your variables</p>
+<pre class="r"><code>cor(wages$height, wages$ed)</code></pre>
+<pre><code>## [1] 0.1140473</code></pre>
+<pre class="r"><code>cor(wages$height, wages$age)</code></pre>
+<pre><code>## [1] -0.1337271</code></pre>
+<pre class="r"><code>cor(wages$height, as.numeric(wages$sex))</code></pre>
+<pre><code>## [1] -0.7036717</code></pre>
+<p>If some of your variables are significantly correlated, then you need to choose one of them, abandoning the other.</p>
+<p>In addition to these problems, models soerjadi many variables the problem then becomes that an increase in the number of variables increases the chance for some of the variables we polim inadequate R-value is simply the result of a failed sample.</p>
+<p>For example, p-value &lt; 0.05 will be every twentieth person among an infinite set of p-values, simply by the law of large numbers.</p>
+<p>Then, the probability that at least one p-value &lt; 0.05 = 0.05. The probability that at least one of the two p-values &lt; 0.05 = 0.098. … … … The probability that at least one of the twenty p-values &lt; 0.05 = 0.64</p>
+<p>In order not to reject real impact on your model variables as a result of this effect, it is recommended to use one of the following approaches</p>
+<ol style="list-style-type: decimal">
+<li>To use a lower α value to determine significance (for example equal to α / p)</li>
+<li>To check out first what the whole model is statistically significant and therefore make the decision to exclude one of the variables.</li>
+</ol>
+<p>For example, for the model m4</p>
+<pre class="r"><code>summary(m4)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = earn ~ height + sex + height:sex, data = wages)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -49699 -20090  -5034  11553 271709 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)      -42677.4    30488.0  -1.400  0.16180   
+## height             1265.9      434.9   2.911  0.00366 **
+## sexfemale         30510.4    39644.1   0.770  0.44166   
+## height:sexfemale   -701.4      585.8  -1.197  0.23141   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 29340 on 1375 degrees of freedom
+## Multiple R-squared:  0.1205, Adjusted R-squared:  0.1186 
+## F-statistic: 62.82 on 3 and 1375 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>R-value of the model will be less than 2.2 e-16, which means that your model significantly better predicts the value of a variable than completely arbitrary overkill.</p>
+<p>To compare models you can use the functions anova()</p>
+<pre class="r"><code>anova(m1, m4)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: earn ~ height
+## Model 2: earn ~ height + sex + height:sex
+##   Res.Df        RSS Df  Sum of Sq      F    Pr(&gt;F)    
+## 1   1377 1.2318e+12                                   
+## 2   1375 1.1840e+12  2 4.7797e+10 27.753 1.528e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The findings indicate that the model m4 has a significant rasnz in the accuracy of predictions than model m1. In other words, because the difference between the models was the presence of the m4 model variable gender(sex), the inclusion of a gender variable in our model improves its accuracy, which means that the variable gender has a right to attend.</p>
+<p>If we consider the data obtained from the function anova() for only one model m4, we see that</p>
+<pre class="r"><code>anova(m4)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: earn
+##              Df     Sum Sq    Mean Sq  F value    Pr(&gt;F)    
+## height        1 1.1448e+11 1.1448e+11 132.9410 &lt; 2.2e-16 ***
+## sex           1 4.6562e+10 4.6562e+10  54.0720 3.307e-13 ***
+## height:sex    1 1.2343e+09 1.2343e+09   1.4334    0.2314    
+## Residuals  1375 1.1840e+12 8.6112e+08                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>p-value for the variable height:sex more marginal p-znaeniya, and therefore the model contains the variable heights + sex + heights:sex is not significantly better than the model containing the variables heights + sex, meaning of a variable height sex, we can refuse.</p>
+</div>
+<div id="the-final-algorithm-of-the-research-model-will-be-to-obtain-and-interpret-the-following-values" class="section level4">
+<h4>The final algorithm of the research model will be to obtain and interpret the following values</h4>
+<ul>
+<li>The coefficients coef(mod)</li>
+<li>Balances - resid(mod)</li>
+<li>The confidence interval confint(mod)</li>
+<li>P-values - summary(mod)</li>
+<li>Comparison of variants model - anova(mod1, mod2)</li>
+</ul>
+</div>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 RStudio Inc.</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-inc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/pages/RStudio-Inc/267733656584415" Class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

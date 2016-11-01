@@ -124,9 +124,9 @@ p {
 }
 
 #rStudioHeader .productName {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica Neue, Helvetica, Arial, sans-serif
   font-weight: normal;
-  font-size: 40px;
+  font-size: 30px;
   color: inherit;
 
   white-space: nowrap;
@@ -462,7 +462,9 @@ p {
   min-height: 160px;
   font-size: 25px;
 }
-
+#homeContent .band .blurb.long{
+  max-width:100%;
+}
 #homeContent .band .actions {
   margin-top: 20px;
 }

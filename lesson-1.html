@@ -129,7 +129,7 @@ $(document).ready(function () {
       <div id="menuItems">
         <a class="menuItem" href="lesson-1.html">Lessons</a>
         <a class="menuItem" href="Tests.html">Tests & trainings</a>
-        <a class="menuItem" href="presentations.html">Presentations</a>
+        <a class="menuItem" href="presentations/Introduction_R.html">Presentations</a>
         <a class="menuItem" href="materials.html">Materials</a>
         <a class="menuItem gitHub" href="https://github.com/rstudio/rmarkdown"></a>
         <a class="menuItem gitHubText" href="https://github.com/rstudio/rmarkdown">Source on GitHub</a>
@@ -154,11 +154,12 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
   <div class="articleBandContent">
 <div class="lessonPage">
   <div class="lessonsNav">
-    <a id="nav-lesson-1" href="lesson-1.html">Introduction</a>
-    <a id="nav-lesson-2" href="lesson-2.html">How It Works</a>
-    <a id="nav-lesson-3" href="lesson-3.html">Code Chunks</a>
-    <a id="nav-lesson-4" href="lesson-4.html">Inline Code</a>
-    <a id="nav-lesson-5" href="lesson-5.html">Code Languages</a>
+    <a id="nav-lesson-1" href="lesson-1.html">R Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">Corellation and linear regression</a>
+    <a id="nav-lesson-3" href="lesson-3.html">Basic models in R</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Multiple regression modelling</a>
+    <!--<a id="nav-lesson-5" href="lesson-5.html">Multiple regression modelling</a>
+    
     <a id="nav-lesson-6" href="lesson-6.html">Parameters</a>
     <a id="nav-lesson-7" href="lesson-7.html">Tables</a>
     <a id="nav-lesson-8" href="lesson-8.html">Markdown Basics</a>
@@ -168,7 +169,7 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
     <a id="nav-lesson-12" href="lesson-12.html">Dashboards</a>
     <a id="nav-lesson-13" href="lesson-13.html">Websites</a>
     <a id="nav-lesson-14" href="lesson-14.html">Interactive Documents</a>
-    <a id="nav-lesson-15" href="lesson-15.html">Cheatsheets</a>
+    <a id="nav-lesson-15" href="lesson-15.html">Cheatsheets</a>-->
   </div>
   <div class="lessonContent">
 
@@ -181,34 +182,414 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 </div>
 
 
-<div id="overview" class="section level3">
-<h3>Overview</h3>
-<p>R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both</p>
+<div id="introduction-to-r-language" class="section level1">
+<h1>Introduction to R language</h1>
 <ul>
-<li>save and execute code</li>
-<li>generate high quality reports that can be shared with an audience</li>
+<li>Large Data Sets</li>
+<li>Modeling and simulations</li>
+<li>Statistical analysis</li>
+<li>Extensive computational task</li>
 </ul>
-<p>R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. This 1-minute video provides a quick tour of what’s possible with R Markdown:</p>
-<iframe src="https://player.vimeo.com/video/178485416" width="700" height="394" frameborder="0" style="margin-bottom: 2em;" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-</iframe>
-</div>
-<div id="installation" class="section level3">
-<h3>Installation</h3>
-<p>Like the rest of R, R Markdown is free and open source. You can install the R Markdown package from CRAN with:</p>
-<pre class="r"><code>install.packages(&quot;rmarkdown&quot;)</code></pre>
-</div>
-<div id="get-started" class="section level3">
-<h3>Get Started</h3>
-<p>The links to the left provide a quick tour of R Markdown. The links at the top provide examples of R Markdown documents, as well as an in depth discussion of various R Markdown topics.</p>
-<p>You may also find the following resources helpful:</p>
+<hr />
 <ul>
-<li><a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">The R Markdown Cheatsheet</a></li>
-<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">The R Markdown Reference Guide</a></li>
+<li>Genomics, transcryptomycs</li>
+<li>Computational evolutionary biolo</li>
+<li>Structural biology</li>
+<li>Image analysis</li>
+<li>Quantative ecology</li>
+</ul>
+<hr />
+<div id="diensions-of-languages" class="section level4">
+<h4>3 diensions of languages</h4>
+<ul>
+<li><strong>High</strong> vs low</li>
+<li><strong>General</strong> vs targeted</li>
+<li><strong>Interpretive</strong> vs compiled</li>
 </ul>
 <hr />
 </div>
-<div id="continue-to-how-it-works" class="section level2">
-<h2><a href="lesson-2.html" class="continue-link">Continue to How It Works</a></h2>
+<div id="structure-of-r-language" class="section level4">
+<h4>Structure of R language</h4>
+<ul>
+<li>S language</li>
+<li>Functions written in R itself</li>
+</ul>
+<hr />
+</div>
+<div id="specific-task" class="section level4">
+<h4>Specific task</h4>
+<ul>
+<li>Multiple testing</li>
+<li>MCMC</li>
+<li>Bias</li>
+<li>Gauss</li>
+<li>Plotting</li>
+<li>Sequencing</li>
+</ul>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Check graphics system</td>
+</tr>
+<tr class="even">
+<td><code>r plot(density(rnorm(100)), col = &quot;red&quot;)</code></td>
+</tr>
+<tr class="odd">
+<td><img src="lesson-1_files/figure-html/unnamed-chunk-1-1.png" width="672" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="variables-types" class="section level4">
+<h4>Variables types</h4>
+<pre class="r"><code>x = 5
+x &lt;- 5
+assign(&quot;x&quot;, 5)</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Commands and Basic Functions</td>
+</tr>
+<tr class="even">
+<td>function c()</td>
+</tr>
+<tr class="odd">
+<td><code>r x &lt;- c(1, 3, 6, 7)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="vectors" class="section level4">
+<h4>Vectors</h4>
+<ul>
+<li>numerical</li>
+<li>character</li>
+<li>logical</li>
+</ul>
+<p>(factors are not classic vector objects)</p>
+<pre class="r"><code>char &lt;- c(&quot;8&quot;, &quot;edge&quot;, &quot;turn8k&quot;)
+logic &lt;- c(TRUE, FALSE, TRUE, FALSE)</code></pre>
+</div>
+<div id="dynamic-typisation" class="section level3">
+<h3>Dynamic typisation</h3>
+<pre class="r"><code>dynam &lt;- c(8, &quot;dds&quot;, TRUE)
+dynam &lt;- c(1, 0, 1, 1, TRUE)
+dynam</code></pre>
+<pre><code>## [1] 1 0 1 1 1</code></pre>
+<p>Priority Char-&gt;integer-&gt;Logic</p>
+<hr />
+<div id="functions" class="section level4">
+<h4>Functions</h4>
+<p>x=function(arg1,arg2,…)</p>
+<p>Invocation - function call</p>
+<p>args:</p>
+<ul>
+<li>tagged(named)</li>
+<li>positional</li>
+</ul>
+<p>Positional: log(x,base)</p>
+<pre class="r"><code>log(x, 10)</code></pre>
+<pre><code>## [1] 0.0000000 0.4771213 0.7781513 0.8450980</code></pre>
+<p>Tagged: log(base=base,x)</p>
+<pre class="r"><code>log(base = 10, x)</code></pre>
+<pre><code>## [1] 0.0000000 0.4771213 0.7781513 0.8450980</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Logical operations</td>
+</tr>
+<tr class="even">
+<td>&gt;,&lt;,&lt;=,&gt;=,==</td>
+</tr>
+<tr class="odd">
+<td><code>r x = 10 x &lt; 5</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] FALSE</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x &gt; 5</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] TRUE</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x == 10</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] TRUE</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="math-operations" class="section level4">
+<h4>Math operations</h4>
+<p>+, -, *, /, ^, sin(), cos(), sqrt(), log()</p>
+<pre class="r"><code>x^10</code></pre>
+<pre><code>## [1] 1e+10</code></pre>
+<hr />
+<p>Quiz</p>
+<pre class="r"><code>x = 10/(5 - 5)
+x</code></pre>
+<pre><code>## [1] Inf</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Recycling Rule</td>
+</tr>
+<tr class="even">
+<td><code>r x &lt;- c(2, 4, 5, 3, -4, 0) x * 5</code></td>
+</tr>
+<tr class="odd">
+<td><code>## [1]  10  20  25  15 -20   0</code></td>
+</tr>
+<tr class="even">
+<td><code>r y &lt;- c(5, 3) x * y</code></td>
+</tr>
+<tr class="odd">
+<td><code>## [1]  10  12  25   9 -20   0</code></td>
+</tr>
+<tr class="even">
+<td><code>r z &lt;- c(1, 2, 3, 4) x * z</code></td>
+</tr>
+<tr class="odd">
+<td><code>## Warning in x * z: longer object length is not a multiple of shorter object ## length</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1]  2  8 15 12 -4  0</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="length-function" class="section level4">
+<h4>Length function</h4>
+<pre class="r"><code>length(x)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### More basic functions</td>
+</tr>
+<tr class="even">
+<td>log(), mean(), min(), max(), sum(), prod(), abs()</td>
+</tr>
+<tr class="odd">
+<td><code>r x &lt;- c(3, 4, 6, -7, 8) mean = sum(x)/length(x) mean</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] 2.8</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="regular-sequenses" class="section level4">
+<h4>Regular sequenses</h4>
+<pre class="r"><code>x = 2:10
+y = 5:1
+z = -5:10
+w = -5:-10
+x</code></pre>
+<pre><code>## [1]  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>## [1] 5 4 3 2 1</code></pre>
+<pre class="r"><code>z</code></pre>
+<pre><code>##  [1] -5 -4 -3 -2 -1  0  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>w</code></pre>
+<pre><code>## [1]  -5  -6  -7  -8  -9 -10</code></pre>
+<hr />
+</div>
+<div id="regular-sequence" class="section level4">
+<h4>Regular sequence</h4>
+<p>seq(from=,to=,by=)</p>
+<pre class="r"><code>z = seq(2, 5, 0.5)
+x = seq(3, 9.1, 0.1)
+y = seq(9, 3, -0.2)
+length(x)</code></pre>
+<pre><code>## [1] 62</code></pre>
+<pre class="r"><code>length(y)</code></pre>
+<pre><code>## [1] 31</code></pre>
+<pre class="r"><code>x * y</code></pre>
+<pre><code>##  [1] 27.00 27.28 27.52 27.72 27.88 28.00 28.08 28.12 28.12 28.08 28.00
+## [12] 27.88 27.72 27.52 27.28 27.00 26.68 26.32 25.92 25.48 25.00 24.48
+## [23] 23.92 23.32 22.68 22.00 21.28 20.52 19.72 18.88 18.00 54.90 54.56
+## [34] 54.18 53.76 53.30 52.80 52.26 51.68 51.06 50.40 49.70 48.96 48.18
+## [45] 47.36 46.50 45.60 44.66 43.68 42.66 41.60 40.50 39.36 38.18 36.96
+## [56] 35.70 34.40 33.06 31.68 30.26 28.80 27.30</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Regular sequence</td>
+</tr>
+<tr class="even">
+<td>rep(x, times=)</td>
+</tr>
+<tr class="odd">
+<td><code>r x = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;) rep(x, 4)</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;A&quot; &quot;B&quot; &quot;C&quot;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="logical-vectors" class="section level4">
+<h4>Logical vectors</h4>
+<p>mode(x)</p>
+<pre class="r"><code>x &lt;- 1:10
+y &lt;- x &lt;= -5
+mode(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>mode(y)</code></pre>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<pre class="r"><code>mode(mode(x))</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Vector indexation</td>
+</tr>
+<tr class="even">
+<td>R is 1 based language</td>
+</tr>
+<tr class="odd">
+<td><code>r x = 1:20 x[2]</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] 2</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[0]</code></td>
+</tr>
+<tr class="even">
+<td><code>## integer(0)</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[5:9]</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] 5 6 7 8 9</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[c(3, 7, 8, 9, 20)]</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1]  3  7  8  9 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[-19]</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[-(1:6)]</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1]  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[x &gt; 10]</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1] 11 12 13 14 15 16 17 18 19 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>r x[TRUE]</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>r y = c(TRUE, FALSE) x[y]</code></td>
+</tr>
+<tr class="even">
+<td><code>##  [1]  1  3  5  7  9 11 13 15 17 19</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="adding-to-vectors" class="section level4">
+<h4>Adding to vectors</h4>
+<pre class="r"><code>vector &lt;- c()
+v2 &lt;- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE)
+vector = c(v2, vector)
+vector = c(F, vector)
+x = 1:3
+x = c(5, x)
+x</code></pre>
+<pre><code>## [1] 5 1 2 3</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>#### Named vectors</td>
+</tr>
+<tr class="even">
+<td><code>r x = 1:5 names(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>## NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>r names(x) &lt;- c(&quot;Fisrt&quot;, &quot;Second&quot;, &quot;Third&quot;, &quot;Forth&quot;, &quot;First&quot;) names(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>## [1] &quot;Fisrt&quot;  &quot;Second&quot; &quot;Third&quot;  &quot;Forth&quot;  &quot;First&quot;</code></td>
+</tr>
+<tr class="even">
+<td><code>r x[&quot;First&quot;]</code></td>
+</tr>
+<tr class="odd">
+<td><code>## First ##     5</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="vector-attributes" class="section level4">
+<h4>Vector attributes</h4>
+<p>length() names() mode()</p>
+<hr />
+<pre class="r"><code>log(3) == log(3, base = exp(1))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>x = seq(5, 100, 0.1)
+x[length(x)]</code></pre>
+<pre><code>## [1] 100</code></pre>
+<hr />
+</div>
+<div id="sort-and-order-functions" class="section level4">
+<h4>Sort and order functions</h4>
+<pre class="r"><code>x &lt;- c(-10, 2, 78, 34, -98, 23, 0, -8)
+order(x)</code></pre>
+<pre><code>## [1] 5 1 8 7 2 6 4 3</code></pre>
+<pre class="r"><code>sort(x)</code></pre>
+<pre><code>## [1] -98 -10  -8   0   2  23  34  78</code></pre>
+<pre class="r"><code>sort(x) == x[order(x)]</code></pre>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+</div>
+</div>
 </div>
 
   </div> <!-- lessonContent -->

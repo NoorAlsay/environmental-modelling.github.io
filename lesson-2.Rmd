@@ -1,0 +1,320 @@
+---
+title: "Introduction"
+output:
+  html_document:
+    toc_float: false
+    highlight: textmate
+    includes:
+      before_body: [include_header.html, include_lessons_nav.html]
+      after_body: [include_lessons_nav_end.html, include_footer.html]
+---
+
+## The correlation
+
+Let's create two vectors, the covariance between them, we try to calculate
+
+```{r}
+A=1:3
+B=c(3,6,7)
+```
+
+The General idea of covariance is to determine the extent mutually changes of two groups of data, i.e. how often a change in one value will coincide with a similar change in the other variable. As the rate of change of the magnitude we will use the deviation from the average. Calculate the deviation from the mean for each of our vectors.
+
+```{r}
+diff_A <- A - mean(A)
+diff_B <- B - mean(B)
+```
+
+To determine the reciprocal change of variables, we multiply their deviations from the mean and proserum results. Obviously, the covariance will be larger, the more we match the signs of the deviations from the mean, and therefore their "direction". It is also clear that in order for the covariance of samples of different sizes were comparable, we must divide the sum by the sample size:
+
+```{r}
+cov <- sum(diff_A*diff_B)/ (length(A)-1)
+```
+
+Separately to calculate the standard deviation we will calculate the squared deviations from the mean for each vector
+
+```{r}
+sq_diff_A <- diff_A^2
+sq_diff_B <- diff_B^2
+```
+
+Summing the squared deviations by dividing them by the sample size minus 1 and is obtained from taking the square root, we get standard deviation.
+
+```{r}
+sd_A <- sqrt(sum(sq_diff_A)/(length(A)-1))
+sd_B <- sqrt(sum(sq_diff_B)/(length(B)-1))
+```
+
+Then the correlation coefficient of the two quantities will be called the ratio of the magnitude of their covariance to the product of the standard deviations of each of these variables.
+
+```{r}
+correlation <- cov/(sd_A*sd_B)
+correlation
+```
+
+The correctness of our calculations we can verify by using the function cor() R
+
+```{r}
+cor(A,B)
+```
+
+The standard command for opening files allows you to just open a URL.
+Open data for physical stability in variable PE
+
+```{r}
+PE <- read.table("http://assets.datacamp.com/course/Conway/Lab_Data/Stats1.13.Lab.04.txt", header=TRUE)
+```
+
+Use the describe function from the psych package, which gives us more detailed descriptive statistics for all the columns of the table than the standard tools.
+
+```{r}
+library("psych")
+describe(PE)
+```
+
+Construct graphs of the mutual dependence of the variables age(age), number of years in the sport (activeyears) and physical stockist(endurance).
+
+```{r}
+plot(PE$age~PE$activeyears)
+plot(PE$endurance~PE$activeyears)
+plot(PE$endurance~PE$age)
+```
+
+Will conduct a baseline test of correlation for all variables
+
+```{r}
+round(cor(PE[,-1]), 2)  
+```
+
+Will do more tests. If the null hypothesis of no correlation can be rejected with a significance level of 5%, the relationship between the variables is significantly different from zero with 95% confidence interval.
+
+```{r}
+cor.test(PE$age, PE$activeyears)
+cor.test(PE$age, PE$endurance)
+cor.test(PE$endurance, PE$activeyears)
+```
+
+
+You have to be careful with the interpretation of correlation coefficients in the analysis of unrepresentative samples. In this exercise you will learn how to split a dataset into subsets, and to see to what extent this may change the correlation coefficients.
+
+Upload data for issledovaniy consequences of concussion of the brain caused by sports-related injuries, which includes survey data as a reference gruppoy and groups of athletes who suffered from concussion.
+
+```{r}
+impact=read.csv("https://dl.dropboxusercontent.com/s/7ubjig9z5hmv858/impact.csv?dl=0")
+describe(impact)
+```
+
+Calculate the coefficients of correlation between coefficiente visual and verbal memory patients.
+
+```{r}
+entirecorr <- round(cor(impact$vismem2,impact$vermem2),2)
+```
+
+Use the describeBy command from the package psych let's see descriptive statistics for variables in this table, grouped by categories of the variable condition - the condition of the respondents. Ie view descriptive statistics for the control and target groups.
+
+```{r}
+describeBy(impact, impact$condition)
+```
+
+Make 2 sub-samples: control(control) and contused(concussed)
+
+```{r}
+control <- subset(impact, condition=="control")
+concussed <- subset(impact, condition=="concussed")
+```
+
+Calculate the coefficients of correlatio for each subsample.
+
+```{r}
+controlcorr <- round(cor(control$vismem2,control$vermem2),2)
+concussedcorr <- round(cor(concussed$vismem2,concussed$vermem2),2)
+```
+
+Derive all the values of the coefficients of correlation at the same time
+
+```{r}
+correlations <- cbind(entirecorr, controlcorr, concussedcorr)
+correlations
+```
+
+
+## Linear regression. Theory
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+As an example, consider the systolic blood pressure in people
+(expressed in mm Hg). It is obvious that blood pressure level cannot be the same for all people – during the examination of a random sample, we almost always will see some variation of the values of this variable, although some values will occur the bowl to the other. We form a sample of a possible distribution of 100 values of blood pressure (we will not specify the mechanism for receiving the data and assume that this is a real measurement from a real randomly selected people, differing in age, sex, body weight, and perhaps some other characteristics):
+
+```{r, }
+
+y <- c( 109.14, 117.55, 106.76, 115.26, 117.13, 125.39, 121.03, 114.03, 124.83, 113.92, 122.04, 109.41, 131.61, 103.93, 116.64, 117.06, 111.73, 120.41, 112.98, 101.20, 120.19, 128.53, 120.14, 108.70, 130.77, 110.16, 129.07, 123.46, 130.02, 130.31, 135.06, 129.17, 137.08, 107.62, 139.77, 121.47, 130.95, 138.15, 114.31, 134.58, 135.86, 138.49, 110.01, 127.80, 122.57, 136.99, 139.53, 127.34, 132.26, 120.85, 124.99, 133.36, 142.46, 123.58, 145.05, 127.83, 140.42, 149.64, 151.01, 135.69, 138.25, 127.24, 135.55, 142.76, 146.67, 146.33, 137.00, 145.00, 143.98, 143.81, 159.92, 160.97, 157.45, 145.68, 129.98, 137.45, 151.22, 136.10, 150.60, 148.79, 167.93, 160.85, 146.28, 145.97, 135.59, 156.62, 153.12, 165.96, 160.94, 168.87, 167.64, 154.64, 152.46, 149.03, 159.56, 149.31, 153.56, 170.87, 163.52, 150.97)
+
+c(mean(y), sd(y)) # mean & sd
+
+shapiro.test(y)
+
+library(ggplot2) # graphical distribution
+ggplot(data = data.frame(y), aes(x = y)) + geom_histogram() +
+ylab("Frequency") + xlab("Pressure , mm. Hg")
+
+```
+
+Greek letters μ and σ denote the true (also General) settings
+models that are usually unknown to us. However, we can estimate
+parameter values at a corresponding sample statistics. Thus, in the case
+of more than 100 values of systolic blood pressure, selective
+ mean and standard deviation are 135.16 mm Hg. and 16.96 mm Hg. respectively. Assuming that the data really come from a normally distributed population, we can write our model in the form yi ~ N(135.16, 16.96). This model can be used to predict blood pressure, but for all people predicted value will be same and will be equal to μ.The usual way of writing this model is as follows:
+ 
+$y_{i}=135.16+\epsilon_{i}$,
+
+where ei is the remnants of a model having a normal distribution with a mean of 0 and a standard deviation of 16.96: ei ~ N(0, 16.96). Balances are calculated as the difference between the actually observed values of the variable Y and the values predicted by the model (in this example, ei = yi - 135.16).
+On the other hand this record is nothing like linear
+ regression model which has no predictor, which is often called the "null model" or "null model" (eng. null models).
+
+####In essence, the statistical model is a simplified mathematical representation of a process that, we believe, has led to the generation of the observed values of the variable under study. This means that we can use the model to simulate (simulation) – ie procedures that simulate the modeled process and allows thereby artificially generate new values of the variable under study, which we hope will have the properties of real data.
+
+New data on the basis of this simple model can be easily generated in R with
+function rnorm():
+
+```{r}
+set.seed(101) # for reproducible result
+y.new.1 <- rnorm(n = 100, mean = 135.16, sd = 16.96)
+
+set.seed(101)
+y.new.2 <- 135.16 + rnorm(n = 100, mean = 0, sd = 16.96)
+```
+
+
+Check identical if both vectors?
+
+```{r}
+all(y.new.1 == y.new.2)
+```
+
+Now you need to remember that the parameters of our null model are only point estimates of the true parameters, and that there will always be uncertainty about how accurately these sample point estimates. In the above commands, this uncertainty was not taken into account: when creating vectors y.new.1 and y.new.2 the sample estimates of the mean and standard deviation of blood pressure were considered as the parameters of the population. Depending on the task, this approach may be sufficient. However, we will take another step and try to take into account the uncertainty in the point estimates of the model parameters.
+In simulations, we use the function lm(), which is designed to fit linear regression models. There is nothing surprising here – after all, we already know that our simple model of blood pressure can be considered as a linear regression model which has no predictor:
+
+```{r}
+y.lm <- lm(y ~ 1) # the formula to evaluate only a free member
+summary(y.lm)
+```
+
+As follows from the presented results, free term customized model (Intercept) exactly coincides with an average value of the data (135.16 mmHg. calendar) and the standard deviation of the residues of the model (Residual standard error) coincides with the standard deviation of these data (16.96 mm Hg. calendar). Importantly, however, we also calculated estimates of the standard error of the average value equal to 1.696 (see column Std. Error to the intersection with a line (Intercept)).
+By definition, the standard error of a parameter is the standard deviation of the [normal] distribution of values of this parameter, calculated on samples of equal size from the same population. We can use this fact to account for uncertainty in the point estimates of the model parameters when generating new data. So, knowing the sample parameter estimates and their standard errors, we can: a) generate a few possible values for these parameters (i.e., to create multiple implementations of the same model, varying the values of parameters a) and b) to generate new data based on each of these alternative implementations of the model.
+
+```{r}
+library(arm)
+set.seed(102) # for reproducible result
+y.sim <- sim(y.lm, 5)
+```
+ 
+y.sim an object of class S4, which contains slots coef (coefficients of the model) and the sigma (STD. deviation of residues of the model):
+
+```{r}
+str(y.sim)
+```
+
+Recoverable alternative implementation of the mean of y.sim:
+
+```{r}
+y.sim@coef
+```
+
+Extracted an alternative implementation of article deviations of the residues:
+
+```{r}
+y.sim@sigma
+```
+
+Of course, 5 realizations of the model is completely insufficient to make any solid conclusions. Increase this number to 1000:
+
+```{r}
+set.seed(102) # for reproducible result
+y.sim <- sim(y.lm, 1000)
+```
+
+
+Initialize empty matrix in which we will store data generated based on 1000 alternative realizations of the model:
+ 
+```{r}
+y.rep <- array(NA, c(1000, 100))
+# Filling matrix y.rep imitated data:
+for(s in 1:1000){
+y.rep[s, ] <- rnorm(100, y.sim@coef[s], y.sim@sigma[s])
+}
+```
+
+To better understand what we just did, draw the histogram of the sampling distribution of blood pressure readings is generated based on, for example, the first 12 realizations of the null model:
+
+```{r}
+par(mfrow = c(5, 4), mar = c(2, 2, 1, 1))
+for(s in 1: 12){ hist(y.rep[s, ], xlab = "", ylab = "",
+breaks = 20, main = "")}
+```
+
+Calculate the interquartile range (IFR) for each simulated data set and compare the resulting distribution of the 1000 values with CALF real data. To calculate the CALF in the R function IQR():
+
+```{r}
+test.IQR <- apply(y.rep, MARGIN = 1, FUN = IQR)
+```
+
+Derive a histogram of values of the CALF, calculated for each of the 1000 simulated distributions of blood pressure. A vertical blue line will show the CALF to the actually observed values of blood pressure:
+
+Initialize empty matrix in which we will store data generated based on 1000 alternative realizations of the model:
+ 
+```{r}
+hist(test.IQR, xlim = range(IQR(y), test.IQR), main = "IQR", xlab = "", ylab = "Frequency", breaks = 20) 
+lines(rep(IQR(y), 2), c(0, 100), col = "blue", lwd = 4)
+```
+
+ 
+In the above illustration clearly shows that the values of IQR for the simulated data is systematically underestimated compared to the real data. This suggests that the null model underestimates the overall level of variation of the actual values of blood pressure. The reason for this may be that we do not consider the effect on blood pressure any important factors (e.g., age, gender, diet, health, etc.). Consider how to expand our null model, adding one of these factors.
+
+Suppose that in addition to blood pressure, we also measured each
+the subject of his/her age (in years). Show graphically the relationship between age and systolic blood pressure. For visualization the trend in the data and add the regression line is blue:
+
+
+```{r}
+# The values of age:
+x <- rep(seq(16, 65, 1), each = 2)
+# Combine the values of age and blood pressure in one table
+Data <- data.frame(Age = x, BP = y)
+ggplot(data = Data, aes(x = Age, BP)) + geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+geom_rug(color = "gray70", sides = "tr") +
+ylab("Frequency") + xlab("Age, years")
+```
+
+The graph shows that between blood pressure and age there is a marked linear relationship: despite some variation of the observations, with increasing age, the average pressure also increases. We can account for this systematic change in the mean blood pressure by adding age (Age) in our null model: $y_{i}=N\big(\beta+\beta_{i}\times Age_{i},\sigma\big)$,
+
+```{r}
+summary(lm(BP ~ Age, data = Data))
+```
+
+According to the results, model blood pressure can be recorded
+as
+$y_{i}=N\big(94.853+0.995\times Age_{i}, 8.953\big)$
+or $y_{i}=94.853+0.995\times Age_{i} + \epsilon_{i}, \epsilon_{i} = N\big(of 0.8.953\big)$
+
+This model is graphically depicted in the above graph in the form of the trend line. Please note: in addition to the significance of the parameters customized models (p << 0.001 in both cases), the standard deviation of the residues is 8.853, which is almost 2 times less than that of the null model (16.96). This indicates that the model including age as a predictor, much better describes the variation of blood pressures at the 100 surveyed subjects than our original model without parameter.
+
+This conclusion is confirmed by the fact that the result of performing simulations similar to that described above, the value of the interquartile range for the original data is located in the center of the distribution of simulated values of CALVES, indicating the absence of systematic differences between simulated and observed data. R language code and the resulting histogram we are not shown suggesting to make the calculations to the reader.
+
+Now it is time to reveal a little secret: the fact that the model
+including the age, much better describes the original data, not surprisingly,
+since these observations were... generated based on the model
+
+$y_{i}=97.078+0.949\times Age_{i} + \epsilon_{i}, \epsilon_{i} = N\big(0,9.563\big)$ as follows:
+
+```{r}
+set.seed(101)
+y <- rnorm(100, mean = 97.078 + 0.949*x, 9.563)
+```
+
+The last model conceived to demonstrate the principles under discussion,
+was used as the "true" (eng. true model) in the sense that it described a General population. In other words, we assumed that we had the ability to simultaneously measure the pressure of all of the existing people and the obtained data describes this "true" model.
+In a real situation neither the structure of the (systematic part + residues) nor the values of the parameters of the true model, the researcher usually unknown. 
+
+All he has is a set of experimental data, often unrepresentative and highly "noisy". With this information and a good understanding of the phenomenon under study (in the sense of what the predictors considered important enough for consideration), the researcher can only hope to approach the structure of the true model and estimate its parameters with a certain accuracy. Unfortunately, such success is not always guaranteed.

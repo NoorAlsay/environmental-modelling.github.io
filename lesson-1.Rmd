@@ -2,40 +2,402 @@
 title: "Introduction"
 output:
   html_document:
+    highlight: textmate
     toc_float: false
     includes:
       before_body: [include_header.html, include_lessons_nav.html]
       after_body: [include_lessons_nav_end.html, include_footer.html]
 ---
 
-### Overview
+Introduction to R language
+========================================================
 
-R Markdown provides an authoring framework for data science. You can use a single R Markdown file to both 
+* Large Data Sets
+* Modeling and simulations
+* Statistical analysis
+* Extensive computational task
 
-* save and execute code
-* generate high quality reports that can be shared with an audience 
+-----
 
-R Markdown documents are fully reproducible and support dozens of static and dynamic output formats. This 1-minute video provides a quick tour of what's possible with R Markdown:
+* Genomics, transcryptomycs
+* Computational evolutionary biolo
+* Structural biology
+* Image analysis
+* Quantative ecology
+
+----
+
+#### 3 diensions of languages
+
+* __High__ vs low
+* __General__ vs targeted
+* __Interpretive__ vs compiled
+
+----
+
+#### Structure of R language
+
+* S language
+* Functions written in R itself
+
+----
+
+#### Specific task
+
+* Multiple testing
+* MCMC
+* Bias 
+* Gauss
+* Plotting
+* Sequencing
+
+----
+#### Check graphics system
 
 
-<iframe src="https://player.vimeo.com/video/178485416" width="700" height="394" frameborder="0" style="margin-bottom: 2em;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-### Installation
-
-Like the rest of R, R Markdown is free and open source. You can install the R Markdown package from CRAN with:
-
-```r
-install.packages("rmarkdown")
+```{r}
+plot(density(rnorm(100)), col = "red")
 ```
 
-### Get Started
 
-The links to the left provide a quick tour of R Markdown. The links at the top provide examples of R Markdown documents, as well as an in depth discussion of various R Markdown topics. 
 
-You may also find the following resources helpful:
+----
+#### Variables types
 
-* [The R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
-* [The R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
 
-***
-## [Continue to How It Works](lesson-2.html){.continue-link}
+```{r}
+x = 5
+x <- 5
+assign("x", 5)
+```
+
+----
+#### Commands and Basic Functions
+
+function c()
+
+
+```{r}
+x <- c(1, 3, 6, 7)
+```
+
+----
+#### Vectors
+
+
+* numerical
+* character
+* logical
+
+(factors are not classic vector objects)
+
+
+```{r}
+char <- c("8", "edge", "turn8k")
+logic <- c(TRUE, FALSE, TRUE, FALSE)
+```
+
+
+### Dynamic typisation
+
+
+```{r}
+dynam <- c(8, "dds", TRUE)
+dynam <- c(1, 0, 1, 1, TRUE)
+dynam
+```
+
+Priority Char->integer->Logic
+
+----
+
+#### Functions
+
+x=function(arg1,arg2,...)
+
+Invocation - function call
+
+args:
+
+* tagged(named)
+* positional
+
+Positional:
+log(x,base)
+
+```{r}
+log(x, 10)
+```
+
+Tagged: 
+log(base=base,x)
+
+```{r}
+log(base = 10, x)
+```
+
+----
+#### Logical operations
+
+>,<,<=,>=,==
+
+```{r}
+x = 10
+x < 5
+```
+
+```{r}
+x > 5
+```
+
+```{r}
+x == 10
+```
+
+----
+
+#### Math operations
+
++, -, *, /, ^, sin(), cos(), sqrt(), log()
+
+
+```{r}
+x^10
+```
+
+----
+
+Quiz
+
+```{r}
+x = 10/(5 - 5)
+x
+```
+
+----
+#### Recycling Rule
+
+
+```{r}
+x <- c(2, 4, 5, 3, -4, 0)
+x * 5
+```
+
+```{r}
+y <- c(5, 3)
+x * y
+```
+
+```{r}
+z <- c(1, 2, 3, 4)
+x * z
+```
+
+----
+#### Length function
+
+```{r}
+length(x)
+```
+
+----
+#### More basic functions
+
+log(), mean(), min(), max(), sum(), prod(), abs()
+
+```{r}
+x <- c(3, 4, 6, -7, 8)
+mean = sum(x)/length(x)
+mean
+```
+
+----
+#### Regular sequenses
+
+```{r}
+x = 2:10
+y = 5:1
+z = -5:10
+w = -5:-10
+x
+```
+
+```{r}
+y
+```
+
+```{r}
+z
+```
+
+```{r}
+w
+```
+
+----
+
+#### Regular sequence
+
+seq(from=,to=,by=)
+
+
+```{r}
+z = seq(2, 5, 0.5)
+x = seq(3, 9.1, 0.1)
+y = seq(9, 3, -0.2)
+length(x)
+```
+
+```{r}
+length(y)
+```
+
+```{r}
+x * y
+```
+
+----
+#### Regular sequence
+
+rep(x, times=)
+
+```{r}
+x = c("A", "B", "C")
+rep(x, 4)
+```
+
+----
+#### Logical vectors
+
+mode(x)
+
+```{r}
+x <- 1:10
+y <- x <= -5
+mode(x)
+```
+
+
+```{r}
+mode(y)
+```
+
+```{r}
+mode(mode(x))
+```
+
+----
+#### Vector indexation 
+
+R is 1 based language
+
+```{r}
+x = 1:20
+x[2]
+```
+
+```{r}
+x[0]
+```
+
+```{r}
+x[5:9]
+```
+
+```{r}
+x[c(3, 7, 8, 9, 20)]
+```
+
+```{r}
+x[-19]
+```
+
+```{r}
+x[-(1:6)]
+```
+
+```{r}
+x[x > 10]
+```
+
+```{r}
+x[TRUE]
+```
+
+```{r}
+y = c(TRUE, FALSE)
+x[y]
+```
+
+----
+#### Adding to vectors
+
+
+```{r}
+vector <- c()
+v2 <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE)
+vector = c(v2, vector)
+vector = c(F, vector)
+x = 1:3
+x = c(5, x)
+x
+```
+----
+#### Named vectors
+
+```{r}
+x = 1:5
+names(x)
+```
+
+```{r}
+names(x) <- c("Fisrt", "Second", "Third", "Forth", 
+    "First")
+names(x)
+```
+
+```{r}
+x["First"]
+```
+
+----
+
+#### Vector attributes
+
+length()
+names()
+mode()
+
+----
+
+
+```{r}
+log(3) == log(3, base = exp(1))
+```
+
+```{r}
+x = seq(5, 100, 0.1)
+x[length(x)]
+```
+
+----
+#### Sort and order functions
+
+
+```{r}
+x <- c(-10, 2, 78, 34, -98, 23, 0, -8)
+order(x)
+```
+
+```{r}
+sort(x)
+```
+
+```{r}
+sort(x) == x[order(x)]
+```
+
+
+
+
+

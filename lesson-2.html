@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Introduction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/textmate.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\envmodel.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">R Markdown</a>
+      <div class="rStudio"><span class="light">from </span> <a href="https://www.rstudio.com/"><div class="logo"></div></a></div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Lessons</a>
+        <a class="menuItem" href="Tests.html">Tests & trainings</a>
+        <a class="menuItem" href="presentations/Introduction_R.html">Presentations</a>
+        <a class="menuItem" href="materials.html">Materials</a>
+        <a class="menuItem gitHub" href="https://github.com/rstudio/rmarkdown"></a>
+        <a class="menuItem gitHubText" href="https://github.com/rstudio/rmarkdown">Source on GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">R Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">Corellation and linear regression</a>
+    <a id="nav-lesson-3" href="lesson-3.html">Basic models in R</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Multiple regression modelling</a>
+    <!--<a id="nav-lesson-5" href="lesson-5.html">Multiple regression modelling</a>
+    
+    <a id="nav-lesson-6" href="lesson-6.html">Parameters</a>
+    <a id="nav-lesson-7" href="lesson-7.html">Tables</a>
+    <a id="nav-lesson-8" href="lesson-8.html">Markdown Basics</a>
+    <a id="nav-lesson-9" href="lesson-9.html">Output Formats</a>
+    <a id="nav-lesson-10" href="lesson-10.html">Notebooks</a>
+    <a id="nav-lesson-11" href="lesson-11.html">Slide Presentations</a>
+    <a id="nav-lesson-12" href="lesson-12.html">Dashboards</a>
+    <a id="nav-lesson-13" href="lesson-13.html">Websites</a>
+    <a id="nav-lesson-14" href="lesson-14.html">Interactive Documents</a>
+    <a id="nav-lesson-15" href="lesson-15.html">Cheatsheets</a>-->
+  </div>
+  <div class="lessonContent">
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+
+</div>
+
+
+<div id="the-correlation" class="section level2">
+<h2>The correlation</h2>
+<p>Let’s create two vectors, the covariance between them, we try to calculate</p>
+<pre class="r"><code>A=1:3
+B=c(3,6,7)</code></pre>
+<p>The General idea of covariance is to determine the extent mutually changes of two groups of data, i.e. how often a change in one value will coincide with a similar change in the other variable. As the rate of change of the magnitude we will use the deviation from the average. Calculate the deviation from the mean for each of our vectors.</p>
+<pre class="r"><code>diff_A &lt;- A - mean(A)
+diff_B &lt;- B - mean(B)</code></pre>
+<p>To determine the reciprocal change of variables, we multiply their deviations from the mean and proserum results. Obviously, the covariance will be larger, the more we match the signs of the deviations from the mean, and therefore their “direction”. It is also clear that in order for the covariance of samples of different sizes were comparable, we must divide the sum by the sample size:</p>
+<pre class="r"><code>cov &lt;- sum(diff_A*diff_B)/ (length(A)-1)</code></pre>
+<p>Separately to calculate the standard deviation we will calculate the squared deviations from the mean for each vector</p>
+<pre class="r"><code>sq_diff_A &lt;- diff_A^2
+sq_diff_B &lt;- diff_B^2</code></pre>
+<p>Summing the squared deviations by dividing them by the sample size minus 1 and is obtained from taking the square root, we get standard deviation.</p>
+<pre class="r"><code>sd_A &lt;- sqrt(sum(sq_diff_A)/(length(A)-1))
+sd_B &lt;- sqrt(sum(sq_diff_B)/(length(B)-1))</code></pre>
+<p>Then the correlation coefficient of the two quantities will be called the ratio of the magnitude of their covariance to the product of the standard deviations of each of these variables.</p>
+<pre class="r"><code>correlation &lt;- cov/(sd_A*sd_B)
+correlation</code></pre>
+<pre><code>## [1] 0.9607689</code></pre>
+<p>The correctness of our calculations we can verify by using the function cor() R</p>
+<pre class="r"><code>cor(A,B)</code></pre>
+<pre><code>## [1] 0.9607689</code></pre>
+<p>The standard command for opening files allows you to just open a URL. Open data for physical stability in variable PE</p>
+<pre class="r"><code>PE &lt;- read.table(&quot;http://assets.datacamp.com/course/Conway/Lab_Data/Stats1.13.Lab.04.txt&quot;, header=TRUE)</code></pre>
+<p>Use the describe function from the psych package, which gives us more detailed descriptive statistics for all the columns of the table than the standard tools.</p>
+<pre class="r"><code>library(&quot;psych&quot;)
+describe(PE)</code></pre>
+<pre><code>##             vars   n   mean    sd median trimmed   mad min max range skew
+## pid            1 200 101.81 58.85  101.5  101.71 74.87   1 204   203 0.01
+## age            2 200  49.41 10.48   48.0   49.46 10.38  20  82    62 0.06
+## activeyears    3 200  10.68  4.69   11.0   10.57  4.45   0  26    26 0.30
+## endurance      4 200  26.50 10.84   27.0   26.22 10.38   3  55    52 0.22
+##             kurtosis   se
+## pid            -1.21 4.16
+## age            -0.14 0.74
+## activeyears     0.46 0.33
+## endurance      -0.44 0.77</code></pre>
+<p>Construct graphs of the mutual dependence of the variables age(age), number of years in the sport (activeyears) and physical stockist(endurance).</p>
+<pre class="r"><code>plot(PE$age~PE$activeyears)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>plot(PE$endurance~PE$activeyears)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<pre class="r"><code>plot(PE$endurance~PE$age)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+<p>Will conduct a baseline test of correlation for all variables</p>
+<pre class="r"><code>round(cor(PE[,-1]), 2)  </code></pre>
+<pre><code>##               age activeyears endurance
+## age          1.00        0.33     -0.08
+## activeyears  0.33        1.00      0.33
+## endurance   -0.08        0.33      1.00</code></pre>
+<p>Will do more tests. If the null hypothesis of no correlation can be rejected with a significance level of 5%, the relationship between the variables is significantly different from zero with 95% confidence interval.</p>
+<pre class="r"><code>cor.test(PE$age, PE$activeyears)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  PE$age and PE$activeyears
+## t = 4.9022, df = 198, p-value = 1.969e-06
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1993491 0.4473145
+## sample estimates:
+##       cor 
+## 0.3289909</code></pre>
+<pre class="r"><code>cor.test(PE$age, PE$endurance)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  PE$age and PE$endurance
+## t = -1.1981, df = 198, p-value = 0.2323
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.22097811  0.05454491
+## sample estimates:
+##         cor 
+## -0.08483813</code></pre>
+<pre class="r"><code>cor.test(PE$endurance, PE$activeyears)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  PE$endurance and PE$activeyears
+## t = 4.8613, df = 198, p-value = 2.37e-06
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1967110 0.4451154
+## sample estimates:
+##       cor 
+## 0.3265402</code></pre>
+<p>You have to be careful with the interpretation of correlation coefficients in the analysis of unrepresentative samples. In this exercise you will learn how to split a dataset into subsets, and to see to what extent this may change the correlation coefficients.</p>
+<p>Upload data for issledovaniy consequences of concussion of the brain caused by sports-related injuries, which includes survey data as a reference gruppoy and groups of athletes who suffered from concussion.</p>
+<pre class="r"><code>impact=read.csv(&quot;https://dl.dropboxusercontent.com/s/7ubjig9z5hmv858/impact.csv?dl=0&quot;)
+describe(impact)</code></pre>
+<pre><code>##            vars  n  mean    sd median trimmed   mad   min   max range
+## subject       1 40 20.50 11.69  20.50   20.50 14.83  1.00 40.00 39.00
+## condition*    2 40  1.50  0.51   1.50    1.50  0.74  1.00  2.00  1.00
+## vermem1       3 40 89.75  6.44  91.00   90.44  6.67 75.00 98.00 23.00
+## vismem1       4 40 74.88  8.60  75.00   74.97  9.64 59.00 91.00 32.00
+## vms1          5 40 34.03  3.90  33.50   34.02  3.62 26.29 41.87 15.58
+## rt1           6 40  0.67  0.15   0.65    0.66  0.13  0.42  1.20  0.78
+## ic1           7 40  8.28  2.05   8.50    8.38  2.22  2.00 12.00 10.00
+## sym1          8 40  0.05  0.22   0.00    0.00  0.00  0.00  1.00  1.00
+## vermem2       9 40 82.00 11.02  85.00   82.97  9.64 59.00 97.00 38.00
+## vismem2      10 40 71.90  8.42  72.00   72.19 10.38 54.00 86.00 32.00
+## vms2         11 40 35.83  8.66  35.15   34.98  6.89 20.15 60.77 40.62
+## rt2          12 40  0.67  0.22   0.65    0.65  0.13  0.19  1.30  1.11
+## ic2          13 40  6.75  2.98   7.00    6.81  2.97  1.00 12.00 11.00
+## sym2         14 40 13.88 15.32   7.00   12.38 10.38  0.00 43.00 43.00
+##             skew kurtosis   se
+## subject     0.00    -1.29 1.85
+## condition*  0.00    -2.05 0.08
+## vermem1    -0.70    -0.51 1.02
+## vismem1    -0.11    -0.96 1.36
+## vms1        0.08    -0.75 0.62
+## rt1         1.14     2.21 0.02
+## ic1        -0.57     0.36 0.32
+## sym1        3.98    14.16 0.03
+## vermem2    -0.65    -0.81 1.74
+## vismem2    -0.28    -0.87 1.33
+## vms2        0.86     0.65 1.37
+## rt2         0.93     1.29 0.03
+## ic2        -0.16    -1.06 0.47
+## sym2        0.44    -1.47 2.42</code></pre>
+<p>Calculate the coefficients of correlation between coefficiente visual and verbal memory patients.</p>
+<pre class="r"><code>entirecorr &lt;- round(cor(impact$vismem2,impact$vermem2),2)</code></pre>
+<p>Use the describeBy command from the package psych let’s see descriptive statistics for variables in this table, grouped by categories of the variable condition - the condition of the respondents. Ie view descriptive statistics for the control and target groups.</p>
+<pre class="r"><code>describeBy(impact, impact$condition)</code></pre>
+<pre><code>## $concussed
+##            vars  n  mean    sd median trimmed   mad   min   max range
+## subject       1 20 30.50  5.92  30.50   30.50  7.41 21.00 40.00 19.00
+## condition*    2 20  1.00  0.00   1.00    1.00  0.00  1.00  1.00  0.00
+## vermem1       3 20 89.65  7.17  92.50   90.56  5.93 75.00 97.00 22.00
+## vismem1       4 20 74.75  8.03  74.00   74.25  8.15 63.00 91.00 28.00
+## vms1          5 20 33.20  3.62  33.09   33.27  3.32 26.29 39.18 12.89
+## rt1           6 20  0.66  0.17   0.63    0.64  0.13  0.42  1.20  0.78
+## ic1           7 20  8.55  1.64   9.00    8.62  1.48  5.00 11.00  6.00
+## sym1          8 20  0.05  0.22   0.00    0.00  0.00  0.00  1.00  1.00
+## vermem2       9 20 74.05  9.86  74.00   73.88 11.86 59.00 91.00 32.00
+## vismem2      10 20 69.20  8.38  69.50   69.62 10.38 54.00 80.00 26.00
+## vms2         11 20 38.27 10.01  35.15   37.32  7.73 25.70 60.77 35.07
+## rt2          12 20  0.78  0.23   0.70    0.74  0.11  0.51  1.30  0.79
+## ic2          13 20  5.00  2.53   5.00    4.88  2.97  1.00 11.00 10.00
+## sym2         14 20 27.65  9.07  27.00   27.75 11.12 13.00 43.00 30.00
+##             skew kurtosis   se
+## subject     0.00    -1.38 1.32
+## condition*   NaN      NaN 0.00
+## vermem1    -0.79    -0.70 1.60
+## vismem1     0.45    -0.72 1.80
+## vms1       -0.13    -0.78 0.81
+## rt1         1.38     2.41 0.04
+## ic1        -0.39    -0.81 0.37
+## sym1        3.82    13.29 0.05
+## vermem2     0.07    -1.24 2.21
+## vismem2    -0.27    -1.26 1.87
+## vms2        0.77    -0.57 2.24
+## rt2         1.09    -0.10 0.05
+## ic2         0.39    -0.28 0.57
+## sym2       -0.11    -1.25 2.03
+## 
+## $control
+##            vars  n  mean   sd median trimmed  mad   min   max range  skew
+## subject       1 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
+## condition*    2 20  2.00 0.00   2.00    2.00 0.00  2.00  2.00  0.00   NaN
+## vermem1       3 20 89.85 5.82  90.00   90.31 7.41 78.00 98.00 20.00 -0.41
+## vismem1       4 20 75.00 9.34  77.00   75.50 9.64 59.00 88.00 29.00 -0.46
+## vms1          5 20 34.86 4.09  34.39   34.85 4.92 27.36 41.87 14.51  0.09
+## rt1           6 20  0.67 0.13   0.66    0.67 0.13  0.42  1.00  0.58  0.47
+## ic1           7 20  8.00 2.41   7.50    8.12 2.22  2.00 12.00 10.00 -0.41
+## sym1          8 20  0.05 0.22   0.00    0.00 0.00  0.00  1.00  1.00  3.82
+## vermem2       9 20 89.95 4.36  90.50   90.06 5.19 81.00 97.00 16.00 -0.25
+## vismem2      10 20 74.60 7.76  74.50   75.00 8.15 60.00 86.00 26.00 -0.23
+## vms2         11 20 33.40 6.44  34.54   33.52 6.30 20.15 44.28 24.13 -0.25
+## rt2          12 20  0.57 0.16   0.56    0.57 0.13  0.19  0.90  0.71 -0.16
+## ic2          13 20  8.50 2.31   9.00    8.69 1.48  3.00 12.00  9.00 -0.73
+## sym2         14 20  0.10 0.31   0.00    0.00 0.00  0.00  1.00  1.00  2.47
+##            kurtosis   se
+## subject       -1.38 1.32
+## condition*      NaN 0.00
+## vermem1       -0.87 1.30
+## vismem1       -1.27 2.09
+## vms1          -1.19 0.91
+## rt1           -0.02 0.03
+## ic1           -0.17 0.54
+## sym1          13.29 0.05
+## vermem2       -1.02 0.97
+## vismem2       -1.11 1.73
+## vms2          -0.77 1.44
+## rt2            0.06 0.04
+## ic2           -0.32 0.52
+## sym2           4.32 0.07
+## 
+## attr(,&quot;call&quot;)
+## by.data.frame(data = x, INDICES = group, FUN = describe, type = type)</code></pre>
+<p>Make 2 sub-samples: control(control) and contused(concussed)</p>
+<pre class="r"><code>control &lt;- subset(impact, condition==&quot;control&quot;)
+concussed &lt;- subset(impact, condition==&quot;concussed&quot;)</code></pre>
+<p>Calculate the coefficients of correlatio for each subsample.</p>
+<pre class="r"><code>controlcorr &lt;- round(cor(control$vismem2,control$vermem2),2)
+concussedcorr &lt;- round(cor(concussed$vismem2,concussed$vermem2),2)</code></pre>
+<p>Derive all the values of the coefficients of correlation at the same time</p>
+<pre class="r"><code>correlations &lt;- cbind(entirecorr, controlcorr, concussedcorr)
+correlations</code></pre>
+<pre><code>##      entirecorr controlcorr concussedcorr
+## [1,]       0.45        0.37          0.35</code></pre>
+</div>
+<div id="linear-regression.-theory" class="section level2">
+<h2>Linear regression. Theory</h2>
+<p>As an example, consider the systolic blood pressure in people (expressed in mm Hg). It is obvious that blood pressure level cannot be the same for all people – during the examination of a random sample, we almost always will see some variation of the values of this variable, although some values will occur the bowl to the other. We form a sample of a possible distribution of 100 values of blood pressure (we will not specify the mechanism for receiving the data and assume that this is a real measurement from a real randomly selected people, differing in age, sex, body weight, and perhaps some other characteristics):</p>
+<pre class="r"><code>y &lt;- c( 109.14, 117.55, 106.76, 115.26, 117.13, 125.39, 121.03, 114.03, 124.83, 113.92, 122.04, 109.41, 131.61, 103.93, 116.64, 117.06, 111.73, 120.41, 112.98, 101.20, 120.19, 128.53, 120.14, 108.70, 130.77, 110.16, 129.07, 123.46, 130.02, 130.31, 135.06, 129.17, 137.08, 107.62, 139.77, 121.47, 130.95, 138.15, 114.31, 134.58, 135.86, 138.49, 110.01, 127.80, 122.57, 136.99, 139.53, 127.34, 132.26, 120.85, 124.99, 133.36, 142.46, 123.58, 145.05, 127.83, 140.42, 149.64, 151.01, 135.69, 138.25, 127.24, 135.55, 142.76, 146.67, 146.33, 137.00, 145.00, 143.98, 143.81, 159.92, 160.97, 157.45, 145.68, 129.98, 137.45, 151.22, 136.10, 150.60, 148.79, 167.93, 160.85, 146.28, 145.97, 135.59, 156.62, 153.12, 165.96, 160.94, 168.87, 167.64, 154.64, 152.46, 149.03, 159.56, 149.31, 153.56, 170.87, 163.52, 150.97)
+
+c(mean(y), sd(y)) # mean &amp; sd</code></pre>
+<pre><code>## [1] 135.15730  16.96017</code></pre>
+<pre class="r"><code>shapiro.test(y)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  y
+## W = 0.98263, p-value = 0.2121</code></pre>
+<pre class="r"><code>library(ggplot2) # graphical distribution</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:psych&#39;:
+## 
+##     %+%, alpha</code></pre>
+<pre class="r"><code>ggplot(data = data.frame(y), aes(x = y)) + geom_histogram() +
+ylab(&quot;Frequency&quot;) + xlab(&quot;Pressure , mm. Hg&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Greek letters μ and σ denote the true (also General) settings models that are usually unknown to us. However, we can estimate parameter values at a corresponding sample statistics. Thus, in the case of more than 100 values of systolic blood pressure, selective mean and standard deviation are 135.16 mm Hg. and 16.96 mm Hg. respectively. Assuming that the data really come from a normally distributed population, we can write our model in the form yi ~ N(135.16, 16.96). This model can be used to predict blood pressure, but for all people predicted value will be same and will be equal to μ.The usual way of writing this model is as follows:</p>
+<p><span class="math inline">\(y_{i}=135.16+\epsilon_{i}\)</span>,</p>
+<p>where ei is the remnants of a model having a normal distribution with a mean of 0 and a standard deviation of 16.96: ei ~ N(0, 16.96). Balances are calculated as the difference between the actually observed values of the variable Y and the values predicted by the model (in this example, ei = yi - 135.16). On the other hand this record is nothing like linear regression model which has no predictor, which is often called the “null model” or “null model” (eng. null models).</p>
+<div id="in-essence-the-statistical-model-is-a-simplified-mathematical-representation-of-a-process-that-we-believe-has-led-to-the-generation-of-the-observed-values-of-the-variable-under-study.-this-means-that-we-can-use-the-model-to-simulate-simulation-ie-procedures-that-simulate-the-modeled-process-and-allows-thereby-artificially-generate-new-values-of-the-variable-under-study-which-we-hope-will-have-the-properties-of-real-data." class="section level4">
+<h4>In essence, the statistical model is a simplified mathematical representation of a process that, we believe, has led to the generation of the observed values of the variable under study. This means that we can use the model to simulate (simulation) – ie procedures that simulate the modeled process and allows thereby artificially generate new values of the variable under study, which we hope will have the properties of real data.</h4>
+<p>New data on the basis of this simple model can be easily generated in R with function rnorm():</p>
+<pre class="r"><code>set.seed(101) # for reproducible result
+y.new.1 &lt;- rnorm(n = 100, mean = 135.16, sd = 16.96)
+
+set.seed(101)
+y.new.2 &lt;- 135.16 + rnorm(n = 100, mean = 0, sd = 16.96)</code></pre>
+<p>Check identical if both vectors?</p>
+<pre class="r"><code>all(y.new.1 == y.new.2)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Now you need to remember that the parameters of our null model are only point estimates of the true parameters, and that there will always be uncertainty about how accurately these sample point estimates. In the above commands, this uncertainty was not taken into account: when creating vectors y.new.1 and y.new.2 the sample estimates of the mean and standard deviation of blood pressure were considered as the parameters of the population. Depending on the task, this approach may be sufficient. However, we will take another step and try to take into account the uncertainty in the point estimates of the model parameters. In simulations, we use the function lm(), which is designed to fit linear regression models. There is nothing surprising here – after all, we already know that our simple model of blood pressure can be considered as a linear regression model which has no predictor:</p>
+<pre class="r"><code>y.lm &lt;- lm(y ~ 1) # the formula to evaluate only a free member
+summary(y.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ 1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -33.957 -13.260   0.413  12.043  35.713 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  135.157      1.696   79.69   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.96 on 99 degrees of freedom</code></pre>
+<p>As follows from the presented results, free term customized model (Intercept) exactly coincides with an average value of the data (135.16 mmHg. calendar) and the standard deviation of the residues of the model (Residual standard error) coincides with the standard deviation of these data (16.96 mm Hg. calendar). Importantly, however, we also calculated estimates of the standard error of the average value equal to 1.696 (see column Std. Error to the intersection with a line (Intercept)). By definition, the standard error of a parameter is the standard deviation of the [normal] distribution of values of this parameter, calculated on samples of equal size from the same population. We can use this fact to account for uncertainty in the point estimates of the model parameters when generating new data. So, knowing the sample parameter estimates and their standard errors, we can: a) generate a few possible values for these parameters (i.e., to create multiple implementations of the same model, varying the values of parameters a) and b) to generate new data based on each of these alternative implementations of the model.</p>
+<pre class="r"><code>library(arm)</code></pre>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loading required package: lme4</code></pre>
+<pre><code>## 
+## arm (Version 1.9-1, built: 2016-8-21)</code></pre>
+<pre><code>## Working directory is D:/YandexDisk/Jobs/EDDY/Environmental Modelling/environemental-modelling.github.io</code></pre>
+<pre><code>## 
+## Attaching package: &#39;arm&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:psych&#39;:
+## 
+##     logit, rescale, sim</code></pre>
+<pre class="r"><code>set.seed(102) # for reproducible result
+y.sim &lt;- sim(y.lm, 5)</code></pre>
+<p>y.sim an object of class S4, which contains slots coef (coefficients of the model) and the sigma (STD. deviation of residues of the model):</p>
+<pre class="r"><code>str(y.sim)</code></pre>
+<pre><code>## Formal class &#39;sim&#39; [package &quot;arm&quot;] with 2 slots
+##   ..@ coef : num [1:5, 1] 136 134 137 136 137
+##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. ..$ : NULL
+##   .. .. ..$ : chr &quot;(Intercept)&quot;
+##   ..@ sigma: num [1:5] 16.8 18.9 17.3 16.7 15</code></pre>
+<p>Recoverable alternative implementation of the mean of y.sim:</p>
+<pre class="r"><code>y.sim@coef</code></pre>
+<pre><code>##      (Intercept)
+## [1,]    136.4780
+## [2,]    134.3288
+## [3,]    136.7079
+## [4,]    136.0775
+## [5,]    137.3250</code></pre>
+<p>Extracted an alternative implementation of article deviations of the residues:</p>
+<pre class="r"><code>y.sim@sigma</code></pre>
+<pre><code>## [1] 16.82947 18.87039 17.30262 16.74308 15.00630</code></pre>
+<p>Of course, 5 realizations of the model is completely insufficient to make any solid conclusions. Increase this number to 1000:</p>
+<pre class="r"><code>set.seed(102) # for reproducible result
+y.sim &lt;- sim(y.lm, 1000)</code></pre>
+<p>Initialize empty matrix in which we will store data generated based on 1000 alternative realizations of the model:</p>
+<pre class="r"><code>y.rep &lt;- array(NA, c(1000, 100))
+# Filling matrix y.rep imitated data:
+for(s in 1:1000){
+y.rep[s, ] &lt;- rnorm(100, y.sim@coef[s], y.sim@sigma[s])
+}</code></pre>
+<p>To better understand what we just did, draw the histogram of the sampling distribution of blood pressure readings is generated based on, for example, the first 12 realizations of the null model:</p>
+<pre class="r"><code>par(mfrow = c(5, 4), mar = c(2, 2, 1, 1))
+for(s in 1: 12){ hist(y.rep[s, ], xlab = &quot;&quot;, ylab = &quot;&quot;,
+breaks = 20, main = &quot;&quot;)}</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>Calculate the interquartile range (IFR) for each simulated data set and compare the resulting distribution of the 1000 values with CALF real data. To calculate the CALF in the R function IQR():</p>
+<pre class="r"><code>test.IQR &lt;- apply(y.rep, MARGIN = 1, FUN = IQR)</code></pre>
+<p>Derive a histogram of values of the CALF, calculated for each of the 1000 simulated distributions of blood pressure. A vertical blue line will show the CALF to the actually observed values of blood pressure:</p>
+<p>Initialize empty matrix in which we will store data generated based on 1000 alternative realizations of the model:</p>
+<pre class="r"><code>hist(test.IQR, xlim = range(IQR(y), test.IQR), main = &quot;IQR&quot;, xlab = &quot;&quot;, ylab = &quot;Frequency&quot;, breaks = 20) 
+lines(rep(IQR(y), 2), c(0, 100), col = &quot;blue&quot;, lwd = 4)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>In the above illustration clearly shows that the values of IQR for the simulated data is systematically underestimated compared to the real data. This suggests that the null model underestimates the overall level of variation of the actual values of blood pressure. The reason for this may be that we do not consider the effect on blood pressure any important factors (e.g., age, gender, diet, health, etc.). Consider how to expand our null model, adding one of these factors.</p>
+<p>Suppose that in addition to blood pressure, we also measured each the subject of his/her age (in years). Show graphically the relationship between age and systolic blood pressure. For visualization the trend in the data and add the regression line is blue:</p>
+<pre class="r"><code># The values of age:
+x &lt;- rep(seq(16, 65, 1), each = 2)
+# Combine the values of age and blood pressure in one table
+Data &lt;- data.frame(Age = x, BP = y)
+ggplot(data = Data, aes(x = Age, BP)) + geom_point() +
+geom_smooth(method = &quot;lm&quot;, se = FALSE) +
+geom_rug(color = &quot;gray70&quot;, sides = &quot;tr&quot;) +
+ylab(&quot;Frequency&quot;) + xlab(&quot;Age, years&quot;)</code></pre>
+<p><img src="lesson-2_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>The graph shows that between blood pressure and age there is a marked linear relationship: despite some variation of the observations, with increasing age, the average pressure also increases. We can account for this systematic change in the mean blood pressure by adding age (Age) in our null model: <span class="math inline">\(y_{i}=N\big(\beta+\beta_{i}\times Age_{i},\sigma\big)\)</span>,</p>
+<pre class="r"><code>summary(lm(BP ~ Age, data = Data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = BP ~ Age, data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -21.6644  -6.2491   0.0072   6.3101  17.3484 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 94.85498    2.66731   35.56   &lt;2e-16 ***
+## Age          0.99512    0.06204   16.04   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.953 on 98 degrees of freedom
+## Multiple R-squared:  0.7242, Adjusted R-squared:  0.7214 
+## F-statistic: 257.3 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>According to the results, model blood pressure can be recorded as <span class="math inline">\(y_{i}=N\big(94.853+0.995\times Age_{i}, 8.953\big)\)</span> or <span class="math inline">\(y_{i}=94.853+0.995\times Age_{i} + \epsilon_{i}, \epsilon_{i} = N\big(of 0.8.953\big)\)</span></p>
+<p>This model is graphically depicted in the above graph in the form of the trend line. Please note: in addition to the significance of the parameters customized models (p &lt;&lt; 0.001 in both cases), the standard deviation of the residues is 8.853, which is almost 2 times less than that of the null model (16.96). This indicates that the model including age as a predictor, much better describes the variation of blood pressures at the 100 surveyed subjects than our original model without parameter.</p>
+<p>This conclusion is confirmed by the fact that the result of performing simulations similar to that described above, the value of the interquartile range for the original data is located in the center of the distribution of simulated values of CALVES, indicating the absence of systematic differences between simulated and observed data. R language code and the resulting histogram we are not shown suggesting to make the calculations to the reader.</p>
+<p>Now it is time to reveal a little secret: the fact that the model including the age, much better describes the original data, not surprisingly, since these observations were… generated based on the model</p>
+<p><span class="math inline">\(y_{i}=97.078+0.949\times Age_{i} + \epsilon_{i}, \epsilon_{i} = N\big(0,9.563\big)\)</span> as follows:</p>
+<pre class="r"><code>set.seed(101)
+y &lt;- rnorm(100, mean = 97.078 + 0.949*x, 9.563)</code></pre>
+<p>The last model conceived to demonstrate the principles under discussion, was used as the “true” (eng. true model) in the sense that it described a General population. In other words, we assumed that we had the ability to simultaneously measure the pressure of all of the existing people and the obtained data describes this “true” model. In a real situation neither the structure of the (systematic part + residues) nor the values of the parameters of the true model, the researcher usually unknown.</p>
+<p>All he has is a set of experimental data, often unrepresentative and highly “noisy”. With this information and a good understanding of the phenomenon under study (in the sense of what the predictors considered important enough for consideration), the researcher can only hope to approach the structure of the true model and estimate its parameters with a certain accuracy. Unfortunately, such success is not always guaranteed.</p>
+</div>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 RStudio Inc.</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-inc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/pages/RStudio-Inc/267733656584415" Class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

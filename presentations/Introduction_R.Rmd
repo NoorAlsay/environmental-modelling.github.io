@@ -1,0 +1,788 @@
+---
+title: "Itroduction to R"
+author: "Alex Yaroslavtsev"
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    ratio: 16x10
+    css: styles.css
+---
+
+#Introduction to R language
+
+---
+
+* Large Data Sets
+* Modeling and simulations
+* Statistical analysis
+* Extensive computational task
+
+---
+
+* Genomics, transcryptomycs
+* Computational evolutionary biolo
+* Structural biology
+* Image analysis
+* Quantative ecology
+
+----
+
+## 3 diensions of languages
+
+* __High__ vs low
+* __General__ vs targeted
+* __Interpretive__ vs compiled
+
+----
+
+## Structure of R language
+
+* S language
+* Functions written in R itself
+
+----
+
+## Specific task
+
+* Multiple testing
+* MCMC
+* Bias 
+* Gauss
+* Plotting
+* Sequencing
+
+----
+
+## Check graphics system
+
+```{r}
+plot(density(rnorm(100)), col = "red")
+```
+
+----
+
+## Variables types
+
+```{r}
+x = 5
+x <- 5
+assign("x", 5)
+```
+
+----
+
+## Commands and Basic Functions
+
+function c()
+
+
+```{r}
+x <- c(1, 3, 6, 7)
+```
+
+----
+
+## Vectors
+
+
+* numerical
+* character
+* logical
+
+(factors are not classic vector objects)
+
+
+```{r}
+char <- c("8", "edge", "turn8k")
+logic <- c(TRUE, FALSE, TRUE, FALSE)
+```
+
+---
+
+### Dynamic typisation
+
+
+```{r}
+dynam <- c(8, "dds", TRUE)
+dynam <- c(1, 0, 1, 1, TRUE)
+dynam
+```
+
+Priority Char->integer->Logic
+
+----
+
+## Functions
+
+x=function(arg1,arg2,...)
+
+Invocation - function call
+
+args:
+
+* tagged(named)
+* positional
+
+Positional:
+log(x,base)
+
+---
+
+## Functions
+
+```{r}
+log(x, 10)
+```
+
+Tagged: 
+log(base=base,x)
+
+```{r}
+log(base = 10, x)
+```
+
+----
+
+## Logical operations
+
+<, >, <=, >=, ==
+
+```{r}
+x = 10
+x < 5
+```
+
+----
+
+## Logical operations
+
+```{r}
+x > 5
+```
+
+```{r}
+x == 10
+```
+
+----
+
+## Math operations
+
++, -, *, /, ^, sin(), cos(), sqrt(), log()
+
+```{r}
+x^10
+```
+
+----
+
+## Quiz
+
+```{r}
+x = 10/(5 - 5)
+x
+```
+
+----
+
+## Recycling Rule
+
+```{r}
+x <- c(2, 4, 5, 3, -4, 0)
+x * 5
+```
+
+```{r}
+y <- c(5, 3)
+x * y
+```
+
+----
+
+## Recycling Rule
+
+```{r}
+x
+z <- c(1, 2, 3, 4)
+x * z
+```
+
+---
+
+## Length function
+
+```{r}
+length(x)
+```
+
+---
+
+## More basic functions
+
+log(), mean(), min(), max(), sum(), prod(), abs()
+
+```{r}
+x <- c(3, 4, 6, -7, 8)
+mean = sum(x)/length(x)
+mean
+```
+
+----
+
+## Regular sequenses
+
+```{r}
+x = 2:10
+y = 5:1
+z = -5:10
+w = -5:-10
+x
+```
+
+```{r}
+y
+```
+
+----
+
+## Regular sequence
+
+```{r}
+z
+```
+
+```{r}
+w
+```
+
+----
+
+## Regular sequence
+
+seq(from=,to=,by=)
+
+
+```{r}
+z = seq(2, 5, 0.5)
+x = seq(3, 9.1, 0.1)
+y = seq(9, 3, -0.2)
+length(x)
+```
+
+----
+
+## Regular sequence
+
+```{r}
+length(y)
+```
+
+```{r}
+x * y
+```
+
+----
+
+## Regular sequence
+
+rep(x, times=)
+
+```{r}
+x = c("A", "B", "C")
+rep(x, 4)
+```
+
+----
+
+## Logical vectors
+
+mode(x)
+
+```{r}
+x <- 1:10
+y <- x <= -5
+mode(x)
+```
+
+----
+
+## Logical vectors
+
+```{r}
+mode(y)
+```
+
+```{r}
+mode(mode(x))
+```
+
+---
+
+## Vector indexation 
+
+R is 1 based language
+
+```{r}
+x = 1:20
+x[2]
+```
+
+```{r}
+x[0]
+```
+
+---
+
+## Vector indexation 
+
+```{r}
+x[5:9]
+```
+
+```{r}
+x[c(3, 7, 8, 9, 20)]
+```
+
+---
+
+## Vector indexation 
+
+```{r}
+x[-19]
+```
+
+```{r}
+x[-(1:6)]
+```
+
+---
+
+## Vector indexation 
+
+```{r}
+x[x > 10]
+```
+
+```{r}
+x[TRUE]
+```
+
+```{r}
+y = c(TRUE, FALSE)
+x[y]
+```
+
+----
+
+## Adding to vectors
+
+```{r}
+vector <- c()
+v2 <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE)
+vector = c(v2, vector)
+vector = c(F, vector)
+x = 1:3
+x = c(5, x)
+x
+```
+
+----
+
+## Named vectors
+
+```{r}
+x = 1:5
+names(x)
+```
+
+```{r}
+names(x) <- c("First", "Second", "Third", "Forth", "Fith")
+names(x)
+```
+
+```{r}
+x["First"]
+```
+
+----
+
+## Vector attributes
+
+length()
+names()
+mode()
+
+---
+
+## Some tricks
+
+```{r}
+log(3) == log(3, base = exp(1))
+```
+
+```{r}
+x = seq(5, 100, 0.1)
+x[length(x)]
+```
+
+----
+
+## Sort and order functions
+
+
+```{r}
+x <- c(-10, 2, 78, 34, -98, 23, 0, -8)
+order(x)
+```
+
+```{r}
+sort(x)
+```
+
+```{r}
+sort(x) == x[order(x)]
+```
+
+---
+
+## Quiz 
+
+#### Turn vector x upside down
+
+---
+
+## Quiz - turn vector upside down
+
+```{r}
+a <- seq(-8,10,.5)
+a
+x = a[length(a):1]
+x
+```
+
+---
+
+## Quiz
+
+#### Insert in middle of vector a - 99
+
+---
+
+## Quiz - insert in middle of vector a - 99
+
+```{r}
+y = c(a[1:round(length(a)/2)], 99, a[(round(length(a)/2) + 1):length(a)])
+```
+
+---
+
+## Quiz 
+
+#### Prove arcos(cos(x)) = x
+
+---
+
+## Quiz prove arcos(cos(x)) = x
+
+```{r}
+x = 0:3
+y = acos(cos(x))
+x == y
+```
+
+---
+
+## Lets remember that we can name vectores
+
+```{r}
+x = c(sin(10), log(5,8), log(3,exp(1)), log(38.6,10), cos(pi + 1), exp(1)^(cos(0)), atan(+Inf))
+names(x) = c("sin(10)", "log8(5)", "ln3", "lg(38.6)", "cos(pi+1)", "e^cos(0)", "arctn(+Inf)");
+sort(x)
+```
+
+---
+
+## Boolean operations
+
+* ___! = not___
+* ___| = or___
+* ___& = and___
+
+A U B - conjunction
+
+---
+
+## Quiz - Boolean operations
+
+```{r}
+x = seq(-10,10,.01)
+```
+
+#### Get all numbers from -10 to -3 and from 0 to 6, but not 3
+
+
+---
+
+## Quiz - Boolean operations
+
+```{r}
+x = seq(-10,10,.01)
+y = x[(x > -10 & x < -3) | (x > 0 & x < 6 & x != 3)]
+y
+```
+
+---
+
+## Factors and summary() function
+
+x = factor("Mouse")
+```{r}
+f = c(rep("mouse", 3), rep("rat", 2), rep("fly", 11))
+f = rep(c("mouse", "rat", "fly"), c(3, 2, 11))
+x = factor(f)
+summary(x)
+summary(f)
+```
+
+---
+
+## Factors and summary() function
+
+```{r}
+summary(1:10)
+summary(1:10)[4]
+```
+
+---
+
+## Quiz - factors
+
+#### Make vector of DNA and calculate ratio of each nucleotide
+```{r}
+dna=factor(rep(c("T","G","C","A"),c(16,38,6,10)))
+```
+---
+
+## Quiz - factors
+
+```{r}
+
+dna=factor(rep(c("T","G","C","A"),c(16,38,6,10)))
+ratio=summary(dna)/sum(summary(dna))
+ratio
+```
+
+---
+
+## Function sample()
+
+sample:
+
+* mixing
+* generating
+
+---
+
+## Function sample()
+
+```{r}
+dna
+sample(dna)
+
+#sample(dna,size = 84, replace = FALSE) - will give error
+```
+---
+
+## Function sample()
+
+```{r}
+
+sample(dna,size = 84, replace = TRUE)
+sampledna = sample(c("A","T","G","C"), size = 10000, replace = TRUE)
+ratio = summary(factor(sampledna)) / length(sampledna)
+ratio2 = summary(factor(dna)) / length(dna)
+```
+
+---
+
+## Function sample()
+
+```{r}
+ratio
+ratio2
+```
+
+---
+
+## Functions union(x,y),intersect(x,y),setdiff(x,y)
+
+```{r}
+x=1:10
+y=6:14
+union(x,y)
+intersect(x,y)
+setdiff(x,y)
+setdiff(y,x)
+```
+
+---
+
+## Removing all variables in session
+
+```{r}
+rm(list=ls())
+```
+
+---
+
+## Function cumsum()
+
+```{r}
+cumsum(1:10)
+```
+
+---
+
+## Quiz 
+#### make big sequence with ratio of G=0.5
+
+---
+
+## Quiz make big sequence with ratio of G=0.5
+
+```{r}
+dna2=sample(c("A","T","G","G","G","C"), size=3826513,replace=TRUE)
+ratio=summary(factor(dna2))/length(dna2)
+ratio
+dna2=sample(c("A","T","G","C"), size=3826513,prob=c(.5/3,.5/3,.5,.5/3),replace=TRUE)
+ratio=summary(factor(dna2))/length(dna2)
+ratio
+
+```
+
+---
+
+## Subsettings
+
+```{r}
+iris[iris$Species==c("setosa","virginica"),]
+iris[iris$Species=="setosa" | iris$Species=="virginica",c("Petal.Length","Species")]
+
+```
+
+---
+
+## All main data types
+
+Type      | Function    | Options
+----------|-------------|-------------------------------------
+Vector    | c()         | [i] -position or logic
+Factor    | factor()    | [] - position or logic
+Matrix    | matrix()    | [row,col]; [i] - positional logical
+List      | list()      | [[i]], $
+dataframe | data.frame()| [,] $
+
+---
+
+## Quiz - subsetting
+
+#### Find species with Petal.Length>2  but <3, show them and their abundance
+
+---
+
+## Quiz - subsetting
+
+```{r}
+summary(factor(iris[(iris$Petal.Length>2 & iris$Petal.Length<6),"Species" ]))
+```
+
+---
+
+#### Functions
+
+```{r}
+my_func = function(p) 
+  {
+    x=p^2
+    y=x^3
+    print("result")
+    return(c(x,y))
+  }
+my_func(2)
+```
+
+---
+
+#### Functions
+
+```{r}
+mathses = function(p,q)
+  {
+    result = c(p+q,log(p+q,10),exp(p+q))
+    names(result) = c("summ", "log","exp")
+    return(result)
+  }
+mathses(2,3)
+```
+
+---
+
+## Conditional instructions if functions
+
+```{r}
+
+mf = function(p)
+  {
+  
+    if (p>0)
+      {
+        x=log(p)
+        return(x)
+      }
+    else
+      {
+        return(NULL)      
+      }
+  }
+mf(-1)
+```
+
+---
+
+##Quiz conditional questions
+
+### gamma(x) gives !(x-1), we need to make function which makes true factorial
+
+---
+
+##Quiz conditional questions
+
+```{r}
+myfactorial = function(p) 
+  {
+    if (p>0 & p%%1==0)
+      {return(gamma(p+1))}
+    else
+      {return(NULL)}
+  }
+  
+  myfactorial(5)
+```
+  
+---
+
+##Quiz conditional questions
+
+```{r}
+ myfactorial = function(p) 
+  {
+    if (p>0 & p%%1==0)
+      {return(gamma(p+1))}
+    else
+      {return(NULL)}
+  }
+
+```
+
+

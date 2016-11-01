@@ -20,8 +20,8 @@ $("#pageContent").removeClass("standardPadding");
   <div class="band full blue first rightText">
     <div class="bandContent vCenter">
       <div class="blurb">
-        <div class="tagline">Analyze. Share. Reproduce.</div>
-        <div>Your data tells a story. Tell it with R Markdown. Turn your analyses into high quality documents, reports, presentations and dashboards.</div>
+        <div class="tagline">Welcome!</div>
+        <div>This resource focuses on a number of intramural courses under the title "Environmental modelling". The course is for masters of the first year of the Faculty of Agriculture. On this website we will publish the lessons and materials necessary for the successful completion of this course.</div>
       </div>
     </div>
     <img class="imageOne" src="images/bandOne.png"/>
@@ -29,14 +29,14 @@ $("#pageContent").removeClass("standardPadding");
 
   <div class="band full gray1 second leftText">
     <div class="bandContent vCenter">
-      <div class="blurb">
-        <div>R Markdown documents are fully reproducible. Use a productive <a href="r_notebooks.html">notebook interface</a> to weave together narrative text and code to produce elegantly formatted output. Use <a href="authoring_knitr_engines.html">multiple languages</a> including R, Python, and SQL.</div>
+      <div class="blurb long">
+        <div>Due to the ever fast growing popularity and a very wide field of the current R use in ecology and a number of other scientific and applied fields of activities,  this course will be tought with extensive use of R language. R itself is a quite specific, but relatively easy to learn, even for people not familiar with programming. In connection with the free form of its distribution (open source) and interest from the giants  of software market at the moment, the language has a well-developed infrastructure and an incredibly extensive set of libraries. </div>
       </div>
     </div>
-    <img class="imageTwo" src="images/bandTwo2.png"/>
+    
   </div>
 
-  <div class="band full third rightText">
+<!-- <div class="band full third rightText">
     <img class="imageThree" src="images/bandThree2.png"/>
     <div class="bandContent vCenter">
       <div class="blurb">
@@ -52,6 +52,6 @@ $("#pageContent").removeClass("standardPadding");
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 <!--/html_preserve-->

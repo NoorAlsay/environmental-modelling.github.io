@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Introduction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<script type="text/javascript" src="js/rmarkdown.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/textmate.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\envmodel.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div id="rStudioHeader" class="alwaysShrunk">
+  <div class="innards bandContent">
+    <div>
+      <a class="productName" href="index.html">R Markdown</a>
+      <div class="rStudio"><span class="light">from </span> <a href="https://www.rstudio.com/"><div class="logo"></div></a></div>
+    </div>
+
+    <div id="menu">
+      <div id="menuToggler"></div>
+      <div id="menuItems">
+        <a class="menuItem" href="lesson-1.html">Lessons</a>
+        <a class="menuItem" href="Tests.html">Tests & trainings</a>
+        <a class="menuItem" href="presentations/Introduction_R.html">Presentations</a>
+        <a class="menuItem" href="materials.html">Materials</a>
+        <a class="menuItem gitHub" href="https://github.com/rstudio/rmarkdown"></a>
+        <a class="menuItem gitHubText" href="https://github.com/rstudio/rmarkdown">Source on GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+#TOC {
+  margin-left: 35px;
+  margin-top: 90px;
+}
+</style>
+
+<script type="text/javascript">
+$(".main-container").removeClass("main-container").removeClass("container-fluid").addClass("footerPushDown");
+</script>
+
+
+<div id="pageContent" class="standardPadding">
+  <div class="articleBandContent">
+<div class="lessonPage">
+  <div class="lessonsNav">
+    <a id="nav-lesson-1" href="lesson-1.html">R Introduction</a>
+    <a id="nav-lesson-2" href="lesson-2.html">Corellation and linear regression</a>
+    <a id="nav-lesson-3" href="lesson-3.html">Basic models in R</a>
+    <a id="nav-lesson-4" href="lesson-4.html">Multiple regression modelling</a>
+    <!--<a id="nav-lesson-5" href="lesson-5.html">Multiple regression modelling</a>
+    
+    <a id="nav-lesson-6" href="lesson-6.html">Parameters</a>
+    <a id="nav-lesson-7" href="lesson-7.html">Tables</a>
+    <a id="nav-lesson-8" href="lesson-8.html">Markdown Basics</a>
+    <a id="nav-lesson-9" href="lesson-9.html">Output Formats</a>
+    <a id="nav-lesson-10" href="lesson-10.html">Notebooks</a>
+    <a id="nav-lesson-11" href="lesson-11.html">Slide Presentations</a>
+    <a id="nav-lesson-12" href="lesson-12.html">Dashboards</a>
+    <a id="nav-lesson-13" href="lesson-13.html">Websites</a>
+    <a id="nav-lesson-14" href="lesson-14.html">Interactive Documents</a>
+    <a id="nav-lesson-15" href="lesson-15.html">Cheatsheets</a>-->
+  </div>
+  <div class="lessonContent">
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+
+</div>
+
+
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MASS&#39;:
+## 
+##     select</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## # A tibble: 1,379 × 6
+##        earn height    sex     race    ed   age
+##       &lt;dbl&gt;  &lt;dbl&gt; &lt;fctr&gt;   &lt;fctr&gt; &lt;int&gt; &lt;int&gt;
+## 1  79571.30  73.89   male    white    16    49
+## 2  96396.99  66.23 female    white    16    62
+## 3  48710.67  63.77 female    white    16    33
+## 4  80478.10  63.22 female    other    16    95
+## 5  82089.35  63.08 female    white    17    43
+## 6  15313.35  64.53 female    white    15    30
+## 7  47104.17  61.54 female    white    12    53
+## 8  50960.05  73.29   male    white    17    50
+## 9   3212.65  72.24   male hispanic    15    25
+## 10 42996.64  72.40   male    white    12    30
+## # ... with 1,369 more rows</code></pre>
+<pre><code>## # A tibble: 48 × 5
+##          state   abbr   low murder tc2009
+##         &lt;fctr&gt; &lt;fctr&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1      Alabama     AL   -27    7.1 4337.5
+## 2       Alaska     AK   -80    3.2 3567.1
+## 3      Arizona     AZ   -40    5.5 3725.2
+## 4     Arkansas     AR   -29    6.3 4415.4
+## 5   California     CA   -45    5.4 3201.6
+## 6     Colorado     CO   -61    3.2 3024.5
+## 7  Connecticut     CT   -32    3.0 2646.3
+## 8     Delaware     DE   -17    4.6 3996.8
+## 9      Florida     FL    -2    5.5 4453.7
+## 10     Georgia     GA   -17    6.0 4180.6
+## # ... with 38 more rows</code></pre>
+<pre><code>## tc2009 ~ low</code></pre>
+<pre><code>## [1] &quot;formula&quot;</code></pre>
+<div id="linear-regression.-practice" class="section level2">
+<h2>Linear regression. Practice</h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+options(stringsAsFactors = FALSE)</code></pre>
+<p>Download the comparison of wealth and of human growth and other demographic characteristics from 1379, which was collected in 1994. This is simulated data based on real data collected with Gelman and hill.</p>
+<pre class="r"><code>wages &lt;- read.csv(&quot;https://dl.dropboxusercontent.com/s/oq4dc134y8xdyce/wages.csv?dl=0&quot;)
+
+tbl_df(wages)</code></pre>
+<pre><code>## # A tibble: 1,379 × 6
+##        earn height    sex     race    ed   age
+##       &lt;dbl&gt;  &lt;dbl&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+## 1  79571.30  73.89   male    white    16    49
+## 2  96396.99  66.23 female    white    16    62
+## 3  48710.67  63.77 female    white    16    33
+## 4  80478.10  63.22 female    other    16    95
+## 5  82089.35  63.08 female    white    17    43
+## 6  15313.35  64.53 female    white    15    30
+## 7  47104.17  61.54 female    white    12    53
+## 8  50960.05  73.29   male    white    17    50
+## 9   3212.65  72.24   male hispanic    15    25
+## 10 42996.64  72.40   male    white    12    30
+## # ... with 1,369 more rows</code></pre>
+<p>Another set of data trying to verify the existence of a relationship between climate and crime in various U.S. States.</p>
+<pre class="r"><code>crime &lt;- read.csv(&quot;https://dl.dropboxusercontent.com/s/cecck1nuo217zy1/crime.csv?dl=0&quot;)
+
+tbl_df(crime)</code></pre>
+<pre><code>## # A tibble: 48 × 5
+##          state  abbr   low murder tc2009
+##          &lt;chr&gt; &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1      Alabama    AL   -27    7.1 4337.5
+## 2       Alaska    AK   -80    3.2 3567.1
+## 3      Arizona    AZ   -40    5.5 3725.2
+## 4     Arkansas    AR   -29    6.3 4415.4
+## 5   California    CA   -45    5.4 3201.6
+## 6     Colorado    CO   -61    3.2 3024.5
+## 7  Connecticut    CT   -32    3.0 2646.3
+## 8     Delaware    DE   -17    4.6 3996.8
+## 9      Florida    FL    -2    5.5 4453.7
+## 10     Georgia    GA   -17    6.0 4180.6
+## # ... with 38 more rows</code></pre>
+<p>You already have a General idea of regression and some equation <span class="math inline">\(y_{i}=N\big(\alpha+\beta_{i}x_{i}+\sigma\big)\)</span>, which in General terms describes. Actually, that is not difficult to notice that the dependence is linear, this linear regression equation. This is the easiest of all possible options, but because it is the most clear. So we’ll start with him.</p>
+<p>In the future we will examine other variants of regression, and even if you in your study it is immediately clear that your data is not described by a linear dependence,it is strongly recommended nachinaet his study with linear dependencies.</p>
+<p>As dependence is linear, the graphical plotting of the data should be straight, what does this video have to go through the main data array. It’s pretty obvious that in almost any large data set is placed on the chart can hold a lot of lines, which will in one way or another to describe the dependence of the quantities from each other. And the question arises how to choose the most direct, which will describe our data in the best way.</p>
+<p>In statistics priyant most appropriate to consider this direct, residual sum of squares(residuals) of which will be minimal. Remains know the vertical distance from each data point to the nearest point of the line or <span class="math inline">\(Residuals=y_{i}-f\big(x_{i}\big)\)</span>, their other name is rejection. Because each residue can be a great sign, and we are interested in the absolute value of all the residues, as each of them essentially characterizes the accuracy of the model, it summed up not remnants themselves and their squares. Thus, the final resulting quality model Velicina will be called the sum of squared deviations(RSS) and will have the form <span class="math inline">\(RSS=\Sigma\big(y_{i}-f\big(x_{i}\big)\big)^{2}\)</span></p>
+<p>It is obvious that R already there are ready decisions for the selection of the coefficients of the straight line, which for these data will give the minimum sum of squares of deviations. Meanwhile, as in any other solution, your role most accurately “explain” the language that you want from him.</p>
+<p>To obtain the linear regression equations in R there exists a function lm. It is part of a large family of functions is used for modeling and uses similar syntax.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="27%" />
+<col width="31%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable for model storage</th>
+<th>Feature initiation of the linear model</th>
+<th>Basic formula: response ~ indicators</th>
+<th>data table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mod</td>
+<td>= lm(</td>
+<td>tc2009 ~ low,</td>
+<td>data = crime)</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>mod = lm(tc2009 ~ low, data = crime)</code></pre>
+<p>In R, there exists a special class of data called “formulas”, developed for the description of dependencies between objects. In order to create such a dependence in R, use the tilde symbol - ~</p>
+<pre class="r"><code>tc2009 ~ low</code></pre>
+<pre><code>## tc2009 ~ low</code></pre>
+<pre class="r"><code>class(tc2009 ~ low)</code></pre>
+<pre><code>## [1] &quot;formula&quot;</code></pre>
+<p>In fact, the record y ~ x, in R is equivalent to mathematical notation <span class="math inline">\(y_{i}=N\big(\alpha+\beta_{i} x_{i}+\sigma\big)\)</span>. For you as user it is important to always remember that or described the dependent variable is always in such records on the left, i.e. the “dependent variable” ~ “independent variable”. Or for the case y ~ x : the dependence y from x, but not as the reverse.</p>
+<p>As mentioned previously, this syntax is typical not only for the function lm. In a family of similar functions belong lmer,lme,rlm,glm,gam, etc., some of which we will discuss later.</p>
+<p>Back to our model, which attempts to describe the dependence of the number of crimes in 2009 from the minimum observed temperature at this territory during that time. In order to see which coefficients we calculated R, contact to the content model of this object - mod</p>
+<pre class="r"><code>mod</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ low, data = crime)
+## 
+## Coefficients:
+## (Intercept)          low  
+##     4256.86        21.65</code></pre>
+<p>In fact, the model object contains much more information than is displayed in the standard output, so the model objects it is always better to save in a separate variable. To see the complexity of the object model, you can perform the following command:</p>
+<pre class="r"><code>names(mod)</code></pre>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+<div id="retrieve-data-from-model" class="section level3">
+<h3>Retrieve data from model</h3>
+<p>There is a standard approach when working with models in R, it briefly describes the storage and study. Its essence boils down to two simple actions - save a model object in memory under a variable and perform a number of functions on this object to retrieve the data for the study of the function of the object.</p>
+<p>For such functions includes the following three functions that provide the minimum required functionality for the study of functions.</p>
+<p>You already know the function summary, which provides us with General information about the object, in this case, we will receive General information on the model:</p>
+<pre class="r"><code>summary(mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ low, data = crime)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1134.36  -647.13    98.03   533.62  1344.30 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  4256.86     233.44  18.236  &lt; 2e-16 ***
+## low            21.65       5.33   4.061 0.000188 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 649.9 on 46 degrees of freedom
+## Multiple R-squared:  0.2639, Adjusted R-squared:  0.2479 
+## F-statistic: 16.49 on 1 and 46 DF,  p-value: 0.000188</code></pre>
+<p>The function predict() (prediction) calculates values you are interested in the variable(column in table) for each of its values. I.e. for all existing values of your variable will be calculated the value of this variable based on your model, so you can find out how much your model’s predicted values differ from the real data.</p>
+<pre class="r"><code>predict(mod)</code></pre>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 3672.386 2525.082 3390.972 3629.091 3282.735 2936.379 3564.150 3888.858 
+##        9       10       11       12       13       14       15       16 
+## 4213.567 3888.858 4516.629 2958.027 3477.561 3239.441 3390.972 3455.913 
+##       17       18       19       20       21       22       23       24 
+## 3910.506 3217.794 3390.972 3499.208 3152.852 3845.564 3390.972 2741.554 
+##       25       26       27       28       29       30       31       32 
+## 3239.441 3174.499 3239.441 3520.855 3174.499 3131.205 3520.855 2958.027 
+##       33       34       35       36       37       38       39       40 
+## 3412.619 3672.386 3087.910 3347.677 3715.680 3845.564 3001.321 3564.150 
+##       41       42       43       44       45       46       47       48 
+## 3758.975 2763.201 3174.499 3607.444 3217.794 3455.913 3066.263 2828.143</code></pre>
+<p>The function resid() (or the remnants of the deviations) will count the difference between each existing value of the output variable predicted by your model the result of (what you believed previous function).</p>
+<pre class="r"><code>resid(mod)</code></pre>
+<pre><code>##            1            2            3            4            5 
+##   665.114163  1042.018405   334.228411   786.308663   -81.135339 
+##            6            7            8            9           10 
+##    88.120658  -917.849587   107.941665   240.132917   291.741665 
+##           11           12           13           14           15 
+##  -573.828580  -702.426592   194.439412  -508.540840   270.428411 
+##           16           17           18           19           20 
+##  -631.913338   538.694415  -692.793590   397.428411  -704.407838 
+##           21           22           23           24           25 
+##   207.848160  -202.963835   531.928411    86.345907   -55.540840 
+##           26           27           28           29           30 
+##   590.500910  -786.540840 -1134.355088  1344.300910  -818.204590 
+##           31           32           33           34           35 
+##   622.844912  -725.826592   282.481162   475.814163   160.589909 
+##           36           37           38           39           40 
+##  -739.577089  -844.780336   716.636165  -975.121091   868.450413 
+##           41           42           43           44           45 
+##   749.625164   761.798657  -597.299090  -921.344087   866.106410 
+##           46           47           48 
+##  -418.513338  -193.962841     5.056907</code></pre>
+</div>
+<div id="interpret-data-models" class="section level3">
+<h3>Interpret data models</h3>
+<p>As already mentioned earlier, the linear model is the most primitive, and therefore better amenable to interpretation <span class="math inline">\(y_{i}=\alpha+\beta x+\epsilon\)</span></p>
+<p><span class="math inline">\(\alpha\)</span> is the value of our variable at x equal to 0.</p>
+<p><span class="math inline">\(\beta\)</span> the expected rise in the value of y caused by an increase in x by one unit</p>
+<p>To obtain the coefficients of your model you can use the following functions is absolutely identical:</p>
+<pre class="r"><code>coef(mod)</code></pre>
+<pre><code>## (Intercept)         low 
+##  4256.86158    21.64725</code></pre>
+<pre class="r"><code>coefficients(mod)</code></pre>
+<pre><code>## (Intercept)         low 
+##  4256.86158    21.64725</code></pre>
+<p>Their results may not seem very clear, but it is enough to recall that the <span class="math inline">\(\alpha\)</span> is the point at which video describing our model intercepts the y-axis and it becomes pretty obvious that the value of Intercept is not that other, as the coefficient <span class="math inline">\(\alpha\)</span>. Well, the rest is set to low, the coefficient <span class="math inline">\(\beta\)</span>.</p>
+<p>Thus for our deliriou variable tc2009 value when low = -10 will be 4256.86 + 21.6 * (-10) = 4040.86. Changing a variable low per unit will change at 21.6 variable tc2009</p>
+<p>We construct a graph, zavisimoti predicted by values of the independent variable is low, use this function predict()</p>
+<pre class="r"><code>qplot(low, predict(mod), data = crime, geom = &quot;line&quot;)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Logically, for building this graph we used geom = “line”, which is equivalent to using the <code>+geom_line()</code>, because our dependence is linear and is exactly the type of graph that we want to. Meanwhile, ggplot allows us to build a model of the model directly when creating graphics, and, oddly enough, we’ve done this in previous lessons. For this there is already well-known to us geometry <code>geom_smooth()</code>. However to get similar to the previous graph, we need to explicitly declare your functions, the type of geometry that we have ispolzovali, i.e. <code>geom_smooth(method=lm)</code>, respectively ggplot will know that our model will have obsi view <code>lm(x~y, crime)</code>. Add a parameter <code>se=FALSE</code> will remove the confidence intervals, which often mislead than help.</p>
+<pre class="r"><code>qplot(low, tc2009, data = crime) + 
+  geom_smooth(method = lm)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>qplot(low, tc2009, data = crime) +
+  geom_smooth(se = FALSE, method = lm)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><strong><em>Important</em></strong>. By default R tries to add <span class="math inline">\(\alpha\)</span> in every linear model . Ie R model builds on the assumption that <span class="math inline">\(\alpha\)</span> is not equal to 0. Meanwhile, we can force R to build a model based on the fact that <span class="math inline">\(\alpha\)</span> is equal to 0. I.e. schedule of our funkyyy must necessarily pass through the coordinates (0, 0).</p>
+<p>To R came from the fact that <span class="math inline">\(\alpha\)</span> is equal to 0 in the model formula need to add 0 or -1. Add to formula +1 makes R cost model is based on the fact that <span class="math inline">\(\alpha\)</span> is not equal to 0. Consider the following examples:</p>
+<p>Include <span class="math inline">\(\alpha\)</span> in the model</p>
+<pre class="r"><code>lm(tc2009 ~ 1 + low, data = crime)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ 1 + low, data = crime)
+## 
+## Coefficients:
+## (Intercept)          low  
+##     4256.86        21.65</code></pre>
+<pre class="r"><code>lm(tc2009 ~ low, data = crime)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ low, data = crime)
+## 
+## Coefficients:
+## (Intercept)          low  
+##     4256.86        21.65</code></pre>
+<pre class="r"><code>qplot(low, predict(lm(tc2009 ~ 1 + low, data = crime)), data = crime, geom = &quot;line&quot;)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Exclude <span class="math inline">\(\alpha\)</span> from the model</p>
+<pre class="r"><code>lm(tc2009 ~ low - 1, data = crime)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ low - 1, data = crime)
+## 
+## Coefficients:
+##    low  
+## -67.36</code></pre>
+<pre class="r"><code>lm(tc2009 ~ 0 + low, data = crime)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ 0 + low, data = crime)
+## 
+## Coefficients:
+##    low  
+## -67.36</code></pre>
+<pre class="r"><code>qplot(low, predict(lm(tc2009 ~ low - 1, data = crime)), data = crime, geom = &quot;line&quot;)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>As you may have noticed the inclusion or exclusion of $$ is radically changing our model. Therefore, such admission is resorted to only in cases when you are sure that your function passes or does not pass through the origin.</p>
+<p>Now let’s use another data set that we have already managed to load wages. This table contains the data that were collected to attempt to describe the dependence of earnings from its growth. Let’s build a model that would describe such a relationship and try to interpret the result.</p>
+<pre class="r"><code>hmod &lt;- lm(earn ~ height, data = wages)
+coef(hmod)</code></pre>
+<pre><code>## (Intercept)      height 
+## -126523.359    2387.196</code></pre>
+<p>Let’s substitute the obtained coefficients in the General linear regression equation <span class="math inline">\(earn=\alpha+\beta\times height+\epsilon\)</span>. As a result, we get the following equation:</p>
+<p><span class="math inline">\(earn=-126523.36+2387.20\times height+\epsilon\)</span></p>
+<p>Let us recall that present at the end of the polynomial <span class="math inline">\(\epsilon\)</span> is an indication that our model may not be absolute accurate, but because there is always a deviation from the real data. All these deviations and represented by the element <span class="math inline">\(\epsilon\)</span>. Because we do not know the error for each particular value in the performance equation we will take <span class="math inline">\(\epsilon\)</span> is zero, but remember that the deviation exists.</p>
+<p>Growth data are presented in inches. Therefore, for a person with a height of 68 inches(1.72 meters) calculated according to our model, the salary will be</p>
+<p><span class="math inline">\(earn=-126523.36+2387.20\times 68+\epsilon\)</span></p>
+<p><span class="math inline">\(earn=35806.24\)</span></p>
+<p>Another fairly simple conclusion from our Moodle is that uvelichenie growth 1 inch should lead to a rise in revenues of $2387.20 per year.</p>
+<pre class="r"><code>qplot(height, earn, data = wages, alpha = I(1/4)) +
+geom_smooth(se = FALSE, method = lm) + theme_bw()</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-19-1.png" width="672" /> ##### Let’s sum up a little</p>
+<p>The fit of the model R consists of 3 stages:</p>
+<ol style="list-style-type: decimal">
+<li><p>Description of the relations we are interested in variables with formulas:<code>earn ~ height</code></p></li>
+<li><p>The use of special formulas for “fit”(creation) of patterns previously defined formula: <code>mod &lt;- lm(earn ~ height, data = wages)</code></p></li>
+<li><p>Analysis of the result in various ways: <code>summary(mod)</code> <code>plot(mod)</code></p></li>
+</ol>
+</div>
+</div>
+<div id="analysis-of-the-model-and-statistical-inference" class="section level2">
+<h2>Analysis of the model and statistical inference</h2>
+<p>It’s pretty obvious that it is fashionable to obtain models describing the relations between completely unrelated data. Then we come to the question of how can we be sure that the connection that we “found” the model exists and is anything like accurate. The smallest sum of squared deviations, and of course a good indicator, but we must understand that this indicator does not guarantee us anything.</p>
+<p>If you go back from a General description to a more statistical model, which we receive through R, represents only the small amount of data that we have, or sampling. We are always interested in a model that describes the population. Thus, most in our model we are interested in how much it differs from the General population.</p>
+<p>Let’s load the data which contain absolutely 100 randomly selected values from the previous nubra data and plot obtained data.</p>
+<pre class="r"><code>w1 &lt;- read.csv(&quot;https://dl.dropboxusercontent.com/s/qnybbt5sxiedsd7/w1.csv?dl=0&quot;)
+qplot(height, earn, data = w1) + geom_smooth(method = lm, se = F)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Construct a similar chart for the whole amount of available data.</p>
+<pre class="r"><code>qplot(height, earn, data = wages) + geom_smooth(method = lm, se = F)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Let us ask ourselves the question of what will happen if we take another sample? Whether <span class="math inline">\(\beta\)</span> = <span class="math inline">\(\beta\)</span> if we take another sample? Probably not. Whether <span class="math inline">\(\beta\)</span> = 0, if we take another sample? Possible.</p>
+<p>You should make an important digression. The value of <span class="math inline">\(\beta\)</span> = 0 is very different in its importance for us from all other values, because it would mean that changing the independent variable does not change the dependent variable. In other words, it will mean that we have no communication between our peremennymi.</p>
+<p>And what inetrval which are all possible values of <span class="math inline">\(\beta\)</span>?</p>
+<p>To answer this question there are two instrumental approach - approaches for reasoning about the uncertainty of the model parameters</p>
+<ul>
+<li>parametric statistics</li>
+<li>nonparametric statistics (bootstrapservice or self-adaptation)</li>
+</ul>
+<div id="parametric-statistics" class="section level3">
+<h3>Parametric statistics</h3>
+<p>If the model satisfies a number of assumptions, it is possible to calculate the probability of observing a certain β, even while the true β=0. If you remember your College statistics, you will realize that we are just many other words have formulated the null hypothesis for regressionnogo analysis. Which consisted in the fact that the General slope of the regression line β is equal to zero.</p>
+<p>In order to understand this deeper, let’s consider a specific example. To do this go back to the model based on earnings growth: <code>hmod</code>:</p>
+<p><code>{r} summary(hmod)</code></p>
+<p>Consider the details offered to us the results. <code># Estimate Std. Error t value Pr(&gt;|t|)</code> <code># 2387 211 height 11.312 &lt;2e-16 ***</code></p>
+<p>The probability that <span class="math inline">\(\beta_{height} &gt;= 2387\)</span> under the condition that the true <span class="math inline">\(\beta=0\)</span> in the example presented to us is almost equal to 2E-16 (almost 0). Or in other words, the probability of the null hypothesis of equal vvelichine extremely small, and therefore we can say that <span class="math inline">\(\beta\)</span> not equal to zero.</p>
+<p>To be precise, low p-values ( &lt; 0.05) may be the result of the following events 1. We have a very unrepresentative sample 2. The true β of the General population is not equal to 0 3. Our model is in principle not correct</p>
+<p>There is a logical question, but if we have proved that β is not zero, then what is it equal. Unfortunately we have no other information other than that obtained from the model, so it is safest to assume that β = 2387.</p>
+<p>Note, however, that we found the most probable point value of β in repeated measurements may be different. To characterize this uncertainty, it is necessary to calculate the confidence interval does not contradict the available data, the range of values in which the true value of our values with a certain probability (e.g. 95%). Roughly assess the limits of confidence interval, assuming approximately 95% of all values of the distribution of estimates of β lie in the range of ±2<span class="math inline">\(SE{\beta}\)</span> relative to its average value, where <span class="math inline">\(SE{\beta}\)</span> – standard error of the parameter β. However, the uncertainty exists in the estimation of the parameter β, but the estimation of its standard deviation for the corresponding normal distribution. Without going into detail, we note that in connection with this circumstance the more accurate bounds of the confidence interval will give the calculations based on the properties of student’s t - distribution. Then the 95% confidence interval for the parameter β will be: β ± <span class="math inline">\(t_{0.975}SE{\beta}\)</span>, where <span class="math inline">\(t_{0.975}\)</span> – 0.975-quantile t-distribution with (n - p) degrees of freedom, n is the sample size and p is the number of model parameters.</p>
+<p>Get the most from the interval for a given precision is possible with the following command:</p>
+<pre class="r"><code>confint(hmod, level = 0.95)</code></pre>
+<pre><code>##                   2.5 %     97.5 %
+## (Intercept) -154135.798 -98910.920
+## height         1973.228   2801.163</code></pre>
+<p>Once again, given us the figures mean that we can with 95% probability to assert that the value of β is in the us range from 1973.228 to 2801.163.</p>
+<p>Let’s consider again the data on the relationship between temperature and crime</p>
+<pre class="r"><code>mod &lt;- lm(tc2009 ~ low, data = crime)
+summary(mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = tc2009 ~ low, data = crime)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1134.36  -647.13    98.03   533.62  1344.30 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  4256.86     233.44  18.236  &lt; 2e-16 ***
+## low            21.65       5.33   4.061 0.000188 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 649.9 on 46 degrees of freedom
+## Multiple R-squared:  0.2639, Adjusted R-squared:  0.2479 
+## F-statistic: 16.49 on 1 and 46 DF,  p-value: 0.000188</code></pre>
+<p>As you can see, the model tells us that there is a significant relationship between cold temperatures and crime rates. On the other hand, it is difficult to imagine what is the real connection between cold temperatures and crime.</p>
+<p>This example should remind you that low p values do not necessarily mean non-zero <span class="math inline">\(\beta\)</span>. And in this case more correct to assume that we selected the wrong model or our sample is very unfortunate.</p>
+<p>What are ways to make the right conclusion from the obtained models? Let’s look at how divided our data by constructing graphs, two tables, whose data models we have built.</p>
+<pre class="r"><code>qplot(low, tc2009, data = crime)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<pre class="r"><code>qplot(height, earn, data = wages)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p>The first thing that catches the eye is that for the first model the linear dependence is entirely appropriate. But the dependence between the variables in the second data table is unlikely to be linear.</p>
+<p>The object contains the model data for plotting on the verification of several assumptions. First of all we should check the assumption of normality of the data distribution.</p>
+<pre class="r"><code>plot(mod)</code></pre>
+<p><img src="lesson-3_files/figure-html/unnamed-chunk-25-1.png" width="672" /><img src="lesson-3_files/figure-html/unnamed-chunk-25-2.png" width="672" /><img src="lesson-3_files/figure-html/unnamed-chunk-25-3.png" width="672" /><img src="lesson-3_files/figure-html/unnamed-chunk-25-4.png" width="672" /></p>
+<p>The first and third graphs - Residuals vs. Fitted and Scale-Location show the dependence of the deviations from the predicted model values. If the graph can be traced at least some dependence, this means that deviations are not random and there is some factor affecting the dependent variable under study, and hence we must complicate our model.</p>
+<p>The second graph Normal Q-Q shows the distribution of variances for the quantiles. The closer the distribution is to the line, the greater the chance that our deviation is normally distributed.</p>
+<p>Using the latest graphics you can opredelit points that are very different from the others and thus lead to strong deviations in the model. On the chart the discontinuous line shows the area at the exit point beyond which you should pay close attention to them. If such points exist, we should create an alternative data set, without these points, to build a new model for the alternative data set and choose the best.</p>
+</div>
+</div>
+
+  </div> <!-- lessonContent -->
+</div> <!-- lessonPage -->
+
+
+<script type="text/javascript">
+  var lesson = window.location.href.match(/lesson-[0-9]+/g);
+  if (lesson !== null) {
+    lesson = 'nav-' + lesson[0];
+    $('#'+lesson).addClass('current');
+  }
+
+  $('#show-answer').on("click", function() {
+    $('#show-answer').addClass('showing');
+    $('#model-answer').addClass('showing');
+  })
+</script>
+  </div> <!-- articleBandContent -->
+</div> <!-- pageContent -->
+
+<div id="rStudioFooter" class="band full">
+<div class="bandContent">
+  <div id="copyright">© Copyright 2016 RStudio Inc.</div>
+  <div id="logos">
+    <a href="https://twitter.com/rstudio" class="footerLogo twitter"></a>
+    <a href="https://github.com/rstudio" class="footerLogo gitHub"></a>
+    <a href="https://www.linkedin.com/company/rstudio-inc" class="footerLogo linkedIn"></a>
+    <a href="https://www.facebook.com/pages/RStudio-Inc/267733656584415" Class="footerLogo facebook"></a>
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
