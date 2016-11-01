@@ -1,0 +1,27 @@
+---
+title: "Tests and quizes"
+output:
+  html_document:
+    toc_float: false
+    highlight: textmate
+    includes:
+      before_body: [include_header.html]
+      after_body: [include_footer.html]
+---
+## R introduction
+
+1. Calculate mean for every column of iris data frame, except the "Species" one and combine result into list
+
+2. Calculate mean for each row excluding data from column "Species" and show it as a vector
+
+3. Create a random DNA 1000 nucleotides long, calculate amount of A and T in it and write it into named vector 'dna_at'
+
+4. Generate a random set of alphabet letters, 10000 characters long and count the number of vowels.
+
+5. Some of the most long sepals. The result is a vector with the names of the types
+
+6. Write a function to calculate vector median
+
+7. Build graphs of sepal length dependence from petal length for each of dataframe iris species (for each spiecies treated as factor)
+
+8. Using data from dataframe 'diamonds'(appears after enabling ggplot2 package) calculate mean price per carat for each category of clarity
