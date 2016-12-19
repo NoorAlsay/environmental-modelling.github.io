@@ -168,11 +168,258 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 <li><p>Calculate mean for each row excluding data from column “Species” and show it as a vector</p></li>
 <li><p>Create a random DNA 1000 nucleotides long, calculate amount of A and T in it and write it into named vector ‘dna_at’</p></li>
 <li><p>Generate a random set of alphabet letters, 10000 characters long and count the number of vowels.</p></li>
-<li><p>Some of the most long sepals. The result is a vector with the names of the types</p></li>
+<li><p>Sort all species in iris table by it’s mean sepal length. The result should be a vector with the species names in correct order</p></li>
 <li><p>Write a function to calculate vector median</p></li>
 <li><p>Build graphs of sepal length dependence from petal length for each of dataframe iris species (for each spiecies treated as factor)</p></li>
 <li><p>Using data from dataframe ‘diamonds’(appears after enabling ggplot2 package) calculate mean price per carat for each category of clarity</p></li>
 </ol>
+</div>
+<div id="passing-activities" class="section level2">
+<h2>Passing activities</h2>
+<p>Using data obtained from the next <a href="https://www.dropbox.com/s/erhs9hoj4vhrz0b/eddypro.csv?dl=1">link</a>, build the best fitted models for chosen variables for given period of time:</p>
+<ul>
+<li>Arsalan - build model for variable co2_flux using data from summer months</li>
+<li>Olga - build model for variable h2o_flux using data from autumn months</li>
+</ul>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.3.2</code></pre>
+<pre><code>## Warning: Duplicated column names deduplicated: &#39;skweness_kurtosis&#39; =&gt;
+## &#39;skweness_kurtosis_1&#39; [93], &#39;discontinuities&#39; =&gt; &#39;discontinuities_1&#39; [95],
+## &#39;timelag&#39; =&gt; &#39;timelag_1&#39; [97], &#39;co2&#39; =&gt; &#39;co2_1&#39; [127], &#39;h2o&#39; =&gt;
+## &#39;h2o_1&#39; [128]</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   filename = col_character(),
+##   date = col_date(format = &quot;&quot;),
+##   time = col_time(format = &quot;&quot;),
+##   daytime = col_character(),
+##   co2_def_timelag = col_character(),
+##   h2o_def_timelag = col_character(),
+##   model = col_character(),
+##   spikes = col_character(),
+##   amplitude_resolution = col_character(),
+##   drop_out = col_character(),
+##   absolute_limits = col_character(),
+##   skweness_kurtosis = col_character(),
+##   skweness_kurtosis_1 = col_character(),
+##   discontinuities = col_character(),
+##   discontinuities_1 = col_character(),
+##   timelag = col_character(),
+##   timelag_1 = col_character(),
+##   attack_angle = col_character(),
+##   non_steady_wind = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>##   [1] &quot;filename&quot;                 &quot;date&quot;                    
+##   [3] &quot;time&quot;                     &quot;DOY&quot;                     
+##   [5] &quot;daytime&quot;                  &quot;file_records&quot;            
+##   [7] &quot;used_records&quot;             &quot;Tau&quot;                     
+##   [9] &quot;qc_Tau&quot;                   &quot;rand_err_Tau&quot;            
+##  [11] &quot;H&quot;                        &quot;qc_H&quot;                    
+##  [13] &quot;rand_err_H&quot;               &quot;LE&quot;                      
+##  [15] &quot;qc_LE&quot;                    &quot;rand_err_LE&quot;             
+##  [17] &quot;co2_flux&quot;                 &quot;qc_co2_flux&quot;             
+##  [19] &quot;rand_err_co2_flux&quot;        &quot;h2o_flux&quot;                
+##  [21] &quot;qc_h2o_flux&quot;              &quot;rand_err_h2o_flux&quot;       
+##  [23] &quot;H_strg&quot;                   &quot;LE_strg&quot;                 
+##  [25] &quot;co2_strg&quot;                 &quot;h2o_strg&quot;                
+##  [27] &quot;co2_v.adv&quot;                &quot;h2o_v.adv&quot;               
+##  [29] &quot;co2_molar_density&quot;        &quot;co2_mole_fraction&quot;       
+##  [31] &quot;co2_mixing_ratio&quot;         &quot;co2_time_lag&quot;            
+##  [33] &quot;co2_def_timelag&quot;          &quot;h2o_molar_density&quot;       
+##  [35] &quot;h2o_mole_fraction&quot;        &quot;h2o_mixing_ratio&quot;        
+##  [37] &quot;h2o_time_lag&quot;             &quot;h2o_def_timelag&quot;         
+##  [39] &quot;sonic_temperature&quot;        &quot;air_temperature&quot;         
+##  [41] &quot;air_pressure&quot;             &quot;air_density&quot;             
+##  [43] &quot;air_heat_capacity&quot;        &quot;air_molar_volume&quot;        
+##  [45] &quot;water_vapor_density&quot;      &quot;e&quot;                       
+##  [47] &quot;es&quot;                       &quot;specific_humidity&quot;       
+##  [49] &quot;RH&quot;                       &quot;VPD&quot;                     
+##  [51] &quot;Tdew&quot;                     &quot;u_unrot&quot;                 
+##  [53] &quot;v_unrot&quot;                  &quot;w_unrot&quot;                 
+##  [55] &quot;u_rot&quot;                    &quot;v_rot&quot;                   
+##  [57] &quot;w_rot&quot;                    &quot;wind_speed&quot;              
+##  [59] &quot;max_speed&quot;                &quot;wind_dir&quot;                
+##  [61] &quot;yaw&quot;                      &quot;pitch&quot;                   
+##  [63] &quot;roll&quot;                     &quot;u.&quot;                      
+##  [65] &quot;TKE&quot;                      &quot;L&quot;                       
+##  [67] &quot;X.z.d..L&quot;                 &quot;bowen_ratio&quot;             
+##  [69] &quot;T.&quot;                       &quot;model&quot;                   
+##  [71] &quot;x_peak&quot;                   &quot;x_offset&quot;                
+##  [73] &quot;x_10.&quot;                    &quot;x_30.&quot;                   
+##  [75] &quot;x_50.&quot;                    &quot;x_70.&quot;                   
+##  [77] &quot;x_90.&quot;                    &quot;un_Tau&quot;                  
+##  [79] &quot;Tau_scf&quot;                  &quot;un_H&quot;                    
+##  [81] &quot;H_scf&quot;                    &quot;un_LE&quot;                   
+##  [83] &quot;LE_scf&quot;                   &quot;un_co2_flux&quot;             
+##  [85] &quot;co2_scf&quot;                  &quot;un_h2o_flux&quot;             
+##  [87] &quot;h2o_scf&quot;                  &quot;spikes&quot;                  
+##  [89] &quot;amplitude_resolution&quot;     &quot;drop_out&quot;                
+##  [91] &quot;absolute_limits&quot;          &quot;skweness_kurtosis&quot;       
+##  [93] &quot;skweness_kurtosis_1&quot;      &quot;discontinuities&quot;         
+##  [95] &quot;discontinuities_1&quot;        &quot;timelag&quot;                 
+##  [97] &quot;timelag_1&quot;                &quot;attack_angle&quot;            
+##  [99] &quot;non_steady_wind&quot;          &quot;u_spikes&quot;                
+## [101] &quot;v_spikes&quot;                 &quot;w_spikes&quot;                
+## [103] &quot;ts_spikes&quot;                &quot;co2_spikes&quot;              
+## [105] &quot;h2o_spikes&quot;               &quot;head_detect&quot;             
+## [107] &quot;t_out&quot;                    &quot;t_in&quot;                    
+## [109] &quot;aux_in&quot;                   &quot;delta_p&quot;                 
+## [111] &quot;chopper&quot;                  &quot;detector&quot;                
+## [113] &quot;pll&quot;                      &quot;sync&quot;                    
+## [115] &quot;mean_value&quot;               &quot;u_var&quot;                   
+## [117] &quot;v_var&quot;                    &quot;w_var&quot;                   
+## [119] &quot;ts_var&quot;                   &quot;co2_var&quot;                 
+## [121] &quot;h2o_var&quot;                  &quot;w.ts_cov&quot;                
+## [123] &quot;w.co2_cov&quot;                &quot;w.h2o_cov&quot;               
+## [125] &quot;co2&quot;                      &quot;h2o&quot;                     
+## [127] &quot;co2_1&quot;                    &quot;h2o_1&quot;                   
+## [129] &quot;co2_signal_strength_7200&quot; &quot;h2o_signal_strength_7200&quot;
+## [131] &quot;flowrate&quot;</code></pre>
+<pre><code>## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
+## нулевое</code></pre>
+<pre><code>## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
+## нулевое
+
+## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
+## нулевое
+
+## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
+## нулевое</code></pre>
+<pre><code>##       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;         u. 
+##         NA         NA         NA         NA         NA -0.3473370 
+##     x_peak   x_offset      x_10.      x_30.      x_50.      x_70. 
+##  0.9250022  0.9381630  0.9709691  0.9895082  0.9965494  1.0000000 
+##      x_90.    Tau_scf      H_scf     LE_scf    co2_scf    h2o_scf 
+##  0.7003597  0.3659544  0.4575340  0.3903480  0.3903480  0.3903480</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = x_70. ~ (H_scf + LE_scf + co2_scf + h2o_scf + x_peak)^5, 
+##     data = summer_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1264.9   -74.3   -35.8    77.6  6638.1 
+## 
+## Coefficients: (16 not defined because of singularities)
+##                                       Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                         -2.950e+04  7.460e+03  -3.954 7.83e-05
+## H_scf                                2.907e+04  8.526e+03   3.409 0.000658
+## LE_scf                               3.057e+04  5.712e+03   5.353 9.23e-08
+## co2_scf                                     NA         NA      NA       NA
+## h2o_scf                                     NA         NA      NA       NA
+## x_peak                              -3.460e+01  4.100e+01  -0.844 0.398777
+## H_scf:LE_scf                        -3.183e+04  7.805e+03  -4.078 4.65e-05
+## H_scf:co2_scf                               NA         NA      NA       NA
+## H_scf:h2o_scf                               NA         NA      NA       NA
+## H_scf:x_peak                         1.239e+01  4.679e+01   0.265 0.791235
+## LE_scf:co2_scf                      -5.517e+03  8.716e+02  -6.330 2.76e-10
+## LE_scf:h2o_scf                              NA         NA      NA       NA
+## LE_scf:x_peak                        1.699e+02  2.034e+01   8.351  &lt; 2e-16
+## co2_scf:h2o_scf                             NA         NA      NA       NA
+## co2_scf:x_peak                              NA         NA      NA       NA
+## h2o_scf:x_peak                              NA         NA      NA       NA
+## H_scf:LE_scf:co2_scf                 7.513e+03  7.481e+02  10.043  &lt; 2e-16
+## H_scf:LE_scf:h2o_scf                        NA         NA      NA       NA
+## H_scf:LE_scf:x_peak                 -1.486e+02  2.885e+01  -5.149 2.76e-07
+## H_scf:co2_scf:h2o_scf                       NA         NA      NA       NA
+## H_scf:co2_scf:x_peak                        NA         NA      NA       NA
+## H_scf:h2o_scf:x_peak                        NA         NA      NA       NA
+## LE_scf:co2_scf:h2o_scf              -5.705e+02  1.328e+02  -4.296 1.78e-05
+## LE_scf:co2_scf:x_peak               -2.289e+01  3.374e+00  -6.783 1.38e-11
+## LE_scf:h2o_scf:x_peak                       NA         NA      NA       NA
+## co2_scf:h2o_scf:x_peak                      NA         NA      NA       NA
+## H_scf:LE_scf:co2_scf:h2o_scf        -7.849e+00  2.380e+01  -0.330 0.741546
+## H_scf:LE_scf:co2_scf:x_peak          3.062e+01  4.537e+00   6.750 1.72e-11
+## H_scf:LE_scf:h2o_scf:x_peak                 NA         NA      NA       NA
+## H_scf:co2_scf:h2o_scf:x_peak                NA         NA      NA       NA
+## LE_scf:co2_scf:h2o_scf:x_peak       -1.828e+00  7.677e-01  -2.381 0.017327
+## H_scf:LE_scf:co2_scf:h2o_scf:x_peak -3.183e-01  1.416e-01  -2.247 0.024693
+##                                        
+## (Intercept)                         ***
+## H_scf                               ***
+## LE_scf                              ***
+## co2_scf                                
+## h2o_scf                                
+## x_peak                                 
+## H_scf:LE_scf                        ***
+## H_scf:co2_scf                          
+## H_scf:h2o_scf                          
+## H_scf:x_peak                           
+## LE_scf:co2_scf                      ***
+## LE_scf:h2o_scf                         
+## LE_scf:x_peak                       ***
+## co2_scf:h2o_scf                        
+## co2_scf:x_peak                         
+## h2o_scf:x_peak                         
+## H_scf:LE_scf:co2_scf                ***
+## H_scf:LE_scf:h2o_scf                   
+## H_scf:LE_scf:x_peak                 ***
+## H_scf:co2_scf:h2o_scf                  
+## H_scf:co2_scf:x_peak                   
+## H_scf:h2o_scf:x_peak                   
+## LE_scf:co2_scf:h2o_scf              ***
+## LE_scf:co2_scf:x_peak               ***
+## LE_scf:h2o_scf:x_peak                  
+## co2_scf:h2o_scf:x_peak                 
+## H_scf:LE_scf:co2_scf:h2o_scf           
+## H_scf:LE_scf:co2_scf:x_peak         ***
+## H_scf:LE_scf:h2o_scf:x_peak            
+## H_scf:co2_scf:h2o_scf:x_peak           
+## LE_scf:co2_scf:h2o_scf:x_peak       *  
+## H_scf:LE_scf:co2_scf:h2o_scf:x_peak *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 209.2 on 3479 degrees of freedom
+##   (872 observations deleted due to missingness)
+## Multiple R-squared:  0.9253, Adjusted R-squared:  0.925 
+## F-statistic:  2873 on 15 and 3479 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = x_70. ~ H_scf + H_scf:LE_scf + LE_scf:co2_scf + 
+##     LE_scf:x_peak + LE_scf:co2_scf:x_peak + H_scf:LE_scf:co2_scf:h2o_scf, 
+##     data = summer_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4068.7  -120.4   -91.1    80.6  6682.4 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  -1.494e+03  9.740e+02  -1.534  0.12516    
+## H_scf                         1.265e+03  1.104e+03   1.146  0.25186    
+## H_scf:LE_scf                  1.926e+02  1.809e+02   1.065  0.28704    
+## LE_scf:co2_scf               -5.049e+01  3.105e+01  -1.626  0.10408    
+## LE_scf:x_peak                 5.959e+00  8.235e-02  72.365  &lt; 2e-16 ***
+## LE_scf:co2_scf:x_peak        -7.138e-01  1.439e-02 -49.590  &lt; 2e-16 ***
+## H_scf:LE_scf:co2_scf:h2o_scf  8.727e-01  3.020e-01   2.890  0.00388 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 332 on 3488 degrees of freedom
+##   (872 observations deleted due to missingness)
+## Multiple R-squared:  0.8115, Adjusted R-squared:  0.8112 
+## F-statistic:  2503 on 6 and 3488 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: x_70. ~ H_scf + H_scf:LE_scf + LE_scf:co2_scf + LE_scf:x_peak + 
+##     LE_scf:co2_scf:x_peak + H_scf:LE_scf:co2_scf:h2o_scf
+## Model 2: x_70. ~ (H_scf + LE_scf + co2_scf + h2o_scf + x_peak)^5
+##   Res.Df       RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1   3488 384360898                                  
+## 2   3479 152323466  9 232037432 588.85 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>## [1] 0.9823915</code></pre>
 </div>
 
   </div> <!-- articleBandContent -->
