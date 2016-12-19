@@ -184,7 +184,10 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 </div>
 <div id="example" class="section level2">
 <h2>Example</h2>
+<pre class="r"><code>#better use code from Import Dataset Wizard 
+library(readr)</code></pre>
 <pre><code>## Warning: package &#39;readr&#39; was built under R version 3.3.2</code></pre>
+<pre class="r"><code>eddypro &lt;- read_csv(&quot;C:/Users/iaros/YandexDisk/Jobs/EDDY/environmental-modelling.github.io/eddypro.csv&quot;,  skip = 1)</code></pre>
 <pre><code>## Warning: Duplicated column names deduplicated: &#39;skweness_kurtosis&#39; =&gt;
 ## &#39;skweness_kurtosis_1&#39; [93], &#39;discontinuities&#39; =&gt; &#39;discontinuities_1&#39; [95],
 ## &#39;timelag&#39; =&gt; &#39;timelag_1&#39; [97], &#39;co2&#39; =&gt; &#39;co2_1&#39; [127], &#39;h2o&#39; =&gt;
@@ -194,6 +197,8 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ##   .default = col_character()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>table_names = names(eddypro)
+data &lt;- read_csv(&quot;C:/Users/iaros/YandexDisk/Jobs/EDDY/environmental-modelling.github.io/eddypro.csv&quot;,  skip = 3, col_names = table_names)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_double(),
@@ -216,8 +221,14 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ##   timelag_1 = col_character(),
 ##   attack_angle = col_character(),
 ##   non_steady_wind = col_character()
-## )</code></pre>
-<pre><code>## See spec(...) for full column specifications.</code></pre>
+## )
+## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>data[data == -9999] = NA
+summer_data = data.frame(data[data$DOY &gt; 150 &amp; data$DOY &lt; 241,])
+
+#summer_data$`x_70%`
+cor_vector = c()
+names(summer_data)</code></pre>
 <pre><code>##   [1] &quot;filename&quot;                 &quot;date&quot;                    
 ##   [3] &quot;time&quot;                     &quot;DOY&quot;                     
 ##   [5] &quot;daytime&quot;                  &quot;file_records&quot;            
@@ -284,6 +295,13 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ## [127] &quot;co2_1&quot;                    &quot;h2o_1&quot;                   
 ## [129] &quot;co2_signal_strength_7200&quot; &quot;h2o_signal_strength_7200&quot;
 ## [131] &quot;flowrate&quot;</code></pre>
+<pre class="r"><code>summer_data = summer_data[,c(-1,-2,-3,-5, -33,-38,-70, -88:-131)]
+cor_vector = c()
+for (i in 1:length(names(summer_data))){
+  x = summer_data[,i]
+  y = summer_data$x_70.
+  cor_vector = c(cor_vector, cor(x,y,use = &quot;na.or.complete&quot;))
+}</code></pre>
 <pre><code>## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
 ## нулевое</code></pre>
 <pre><code>## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
@@ -294,12 +312,18 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 
 ## Warning in cor(x, y, use = &quot;na.or.complete&quot;): стандартное отклонение
 ## нулевое</code></pre>
+<pre class="r"><code>names(cor_vector) = names(summer_data)
+cor_vector[cor_vector^2 &gt; .1]</code></pre>
 <pre><code>##       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;         u. 
 ##         NA         NA         NA         NA         NA -0.3473370 
 ##     x_peak   x_offset      x_10.      x_30.      x_50.      x_70. 
 ##  0.9250022  0.9381630  0.9709691  0.9895082  0.9965494  1.0000000 
 ##      x_90.    Tau_scf      H_scf     LE_scf    co2_scf    h2o_scf 
 ##  0.7003597  0.3659544  0.4575340  0.3903480  0.3903480  0.3903480</code></pre>
+<pre class="r"><code># H_scf  LE_scf  co2_scf  h2o_scf x_peak
+
+model1 = lm(x_70.~(H_scf+LE_scf+co2_scf+h2o_scf+x_peak)^5, data = summer_data)
+summary(model1)</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = x_70. ~ (H_scf + LE_scf + co2_scf + h2o_scf + x_peak)^5, 
@@ -383,6 +407,8 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ##   (872 observations deleted due to missingness)
 ## Multiple R-squared:  0.9253, Adjusted R-squared:  0.925 
 ## F-statistic:  2873 on 15 and 3479 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>model2 = lm(x_70.~ H_scf + H_scf:LE_scf + LE_scf:co2_scf +LE_scf:x_peak + LE_scf:co2_scf:x_peak +H_scf:LE_scf:co2_scf:h2o_scf, data = summer_data)
+summary(model2)</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = x_70. ~ H_scf + H_scf:LE_scf + LE_scf:co2_scf + 
@@ -409,6 +435,8 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ##   (872 observations deleted due to missingness)
 ## Multiple R-squared:  0.8115, Adjusted R-squared:  0.8112 
 ## F-statistic:  2503 on 6 and 3488 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>model3  = lm(x_70.~ H_scf, data = summer_data)
+anova(model2, model1)</code></pre>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: x_70. ~ H_scf + H_scf:LE_scf + LE_scf:co2_scf + LE_scf:x_peak + 
@@ -419,7 +447,13 @@ $(".main-container").removeClass("main-container").removeClass("container-fluid"
 ## 2   3479 152323466  9 232037432 588.85 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>cor(summer_data$H_scf, summer_data$LE_scf,use = &quot;na.or.complete&quot;)</code></pre>
 <pre><code>## [1] 0.9823915</code></pre>
+<pre class="r"><code># Multicollinearity test
+# For example you have left columns a,b,c,d,e,f
+# you need to produce 
+# data2 = data.frame(a = data$a,b = data$b,c = data$c,d = data$d,e = data$e,f = data$f)
+# cor(data2, use = &quot;na.or.complete&quot;)</code></pre>
 </div>
 
   </div> <!-- articleBandContent -->
